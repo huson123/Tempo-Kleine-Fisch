@@ -1,17 +1,17 @@
 import java.util.*;
 
 public abstract class Entity {
-    private enum Type {
+    public enum Type {
         FISH, SHIP
     }
     private Type type; 
 
     private int position; 
-    private int name; 
-    private List<String> colors; 
+    private String name; 
+    protected List<String> colors; 
 
     // Constructor 
-    public Entity(Type type, int position, int name, List<String> colors)
+    public Entity(Type type, int position, String name, List<String> colors)
     {
         this.type = type; 
         this.position = position; 
@@ -58,5 +58,10 @@ class Ship extends Entity {
     public Ship(String name, List<String> colors)
     {
         super(Type.SHIP, -5, name, colors); 
+    }
+
+    public void addColor(String color)
+    {
+        this.colors.add(color);
     }
 }
