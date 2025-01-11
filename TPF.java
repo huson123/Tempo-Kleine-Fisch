@@ -32,7 +32,7 @@ class Game {
                 Fish rolledFish = getFishByColor(rolledColor);
 
                 if (rolledFish != null)     rolledFish.move();
-                else                        handleSpecialRoll(scanner);
+                else                        handleEscapedRoll(scanner);
             }
 
             processGameState();
@@ -65,7 +65,7 @@ class Game {
         return fishes.stream().filter(fish -> fish.getColor().equals(color)).findFirst().orElse(null);
     }
     //function to determine the move of escaped fish
-    private void handleSpecialRoll(Scanner scanner) {
+    private void handleEscapedRoll(Scanner scanner) {
         if (playerChoice == 2) {
             String rolledColor = roll(getCurrentFishColor(fishes));
             Fish randomFish = getFishByColor(rolledColor);
