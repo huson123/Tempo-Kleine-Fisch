@@ -1,7 +1,6 @@
 import java.util.*;
-import Entity.java;
 
-import javax.swing.text.html.parser.Entity;
+
 public class Gameplay {
 
     private boolean gameOver = false; // flag 
@@ -68,7 +67,7 @@ public class Gameplay {
     // Method 
     public void init()
     {
-        entities.add(new Ship("Ship", Arrays.asList("Red", "Green"))); 
+        entities.add(new Ship("Ship", new ArrayList<>(Arrays.asList("Red", "Green")))); 
         entities.add(new Fish("Fish1", "Blue"));
         entities.add(new Fish("Fish2", "Yellow"));
         entities.add(new Fish("Fish3", "Pink"));
@@ -93,42 +92,43 @@ public class Gameplay {
         }
     }
 
-    public void update()
-    {
+    public void update() {
+        List<Entity> entitiesToRemove = new ArrayList<>(); // To collect entities marked for removal
+    
+        // Primary iteration using an Iterator
         Iterator<Entity> iterator = entities.iterator();
-        while (iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             Entity entity = iterator.next();
-            
-            if (entity.getType() == Entity.Type.FISH)
-            {
-                if (entity.getPosition() >= SEA)
-                {
-                    addFishScore(); 
-                    iterator.remove(); 
+    
+            // If the entity is a fish
+            if (entity.getType() == Entity.Type.FISH) {
+                if (entity.getPosition() >= SEA) {
+                    addFishScore();
+                    entitiesToRemove.add(entity); // Mark the fish for removal
                 }
             }
-            else if (entity.getType() == Entity.Type.SHIP)
-            {
-                for (Entity fish: entities)
-                {
-                    if  ((fish.getType() == Entity.Type.FISH) && (fish.getPosition() == entity.getPosition()))
-                    {
-                        addBoatScore(); 
+            // If the entity is a ship
+            else if (entity.getType() == Entity.Type.SHIP) {
+                // Check for collisions with fish
+                for (Entity fish : entities) {
+                    if (fish.getType() == Entity.Type.FISH && fish.getPosition() == entity.getPosition()) {
+                        addBoatScore();
                         ((Ship) entity).addColor(fish.getColors().get(0));
-                        iterator.remove();  
+                        entitiesToRemove.add(fish); // Mark the fish for removal
                     }
                 }
             }
-            
-
-            if (entities.size() == 1)
-            {
-                setGameOver(); 
-            }
-        } 
+        }
+    
+        // Remove all marked entities after the iteration
+        entities.removeAll(entitiesToRemove);
+    
+        // End the game if no fish are left
+        if (entities.stream().noneMatch(e -> e.getType() == Entity.Type.FISH)) {
+            setGameOver();
+        }
     }
-
+    
     public void printResult()
     {
         if (getBoatScore() > getFishScore())
@@ -144,17 +144,4 @@ public class Gameplay {
             System.out.println("It's a Tie!");
         }
     } 
-
-    public static void main(String[] args)
-    {
-        Gameplay game = new Gameplay(); 
-
-        while (!game.isGameOver())
-        {
-            game.rollAndMove(); 
-            game.update(); 
-        }
-
-        game.printResult(); 
-    }
 }
