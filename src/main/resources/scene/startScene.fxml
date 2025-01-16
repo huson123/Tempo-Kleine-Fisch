@@ -16,3 +16,5 @@
       </Label>
    </children>
 </AnchorPane>
+
+<fx:root type="AnchorPane" fx:controller="controller.tkfisch.Controller">
