@@ -45,7 +45,12 @@ public class Gameplay {
 
     public List<String> getDiceColor()
     {
-        return this.diceColor; 
+        return this.diceColor;
+    }
+
+    public List<Entity> getEntities()
+    {
+        return this.entities;
     }
 
     // Setter 

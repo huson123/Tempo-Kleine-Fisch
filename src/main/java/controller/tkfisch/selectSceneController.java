@@ -1,79 +1,45 @@
 package controller.tkfisch;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
+public class selectSceneController implements SceneController {
+    private Controller appController;
 
-public class selectSceneController {
-    Parent root;
-    Stage stage;
-    Scene scene;
-    static private String state;
-    @FXML
-    private ImageView shipImage;
-    @FXML
-    private ImageView fishImage;
-
-    private final Image shipReleased = new Image(getClass().getResourceAsStream("/image/shipReleased.jpg"));
-    private final Image shipPressed = new Image(getClass().getResourceAsStream("/image/shipPressed.jpg"));
-
-    private final Image fishReleased = new Image(getClass().getResourceAsStream("/image/fishReleased.jpg"));
-    private final Image fishPressed = new Image(getClass().getResourceAsStream("/image/fishPressed.jpg"));
-
-    public void switchToGame(MouseEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/scene/gameScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    public String getState(){
-        return state;
+    @Override
+    public void setAppController(Controller appController) {
+        this.appController = appController;
     }
 
-    //simulating image as button (ship)
-    public void shipPressed(MouseEvent event) throws IOException {
-        state = "ship";
-        shipImage.setImage(shipPressed);
-        System.out.println("ship pressed");
-        switchToGame(event);
-    }
-    public void shipEntered(){
-        shipImage.setImage(shipPressed);
-        System.out.println("ship hovered");
-    }
-    public void shipExited(){
-        shipImage.setImage(shipReleased);
-        System.out.println("ship exited");
+    public void fishPressed(MouseEvent event) {
+        appController.switchToScene("fishSelect");
     }
 
-    //simulating image as button (fish)
-    public void fishPressed(MouseEvent event) throws IOException {
-        state = "fish";
-        fishImage.setImage(fishPressed);
-        System.out.println("fish pressed");
-        switchToGame(event);
+    public void shipPressed(MouseEvent event) {
+        appController.switchToScene("game");
     }
-    public void fishEntered(){
-        fishImage.setImage(fishPressed);
-        System.out.println("fish hovered");
+
+    // Event handlers for mouse hover and exit (ship)
+    public void shipEntered(MouseEvent event) {
+        System.out.println("Mouse entered the ship image.");
+        // Add hover effect logic here, e.g., changing opacity
     }
-    public void fishExited(){
-        fishImage.setImage(fishReleased);
-        System.out.println("fish exited");
+
+    public void shipExited(MouseEvent event) {
+        System.out.println("Mouse exited the ship image.");
+        // Add hover effect logic here, e.g., resetting opacity
+    }
+
+    // Event handlers for mouse hover and exit (fish)
+    public void fishEntered(MouseEvent event) {
+        System.out.println("Mouse entered the fish image.");
+        // Add hover effect logic here, e.g., changing opacity
+    }
+
+    public void fishExited(MouseEvent event) {
+        System.out.println("Mouse exited the fish image.");
+        // Add hover effect logic here, e.g., resetting opacity
     }
 }

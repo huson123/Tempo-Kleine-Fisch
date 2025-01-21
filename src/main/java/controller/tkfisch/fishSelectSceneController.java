@@ -1,32 +1,15 @@
 package controller.tkfisch;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class fishSelectSceneController {
-    Parent root;
-    Stage stage;
-    Scene scene;
+public class fishSelectSceneController implements SceneController {
+    private Controller appController;
 
     @FXML
-    private ImageView blueFishImage;
-    @FXML
-    private ImageView pinkFishImage;
-    @FXML
-    private ImageView yellowFishImage;
-    @FXML
-    private ImageView orangeFishImage;
+    private ImageView blueFishImage, pinkFishImage, yellowFishImage, orangeFishImage;
 
     private final Image blueFishPressed = new Image(getClass().getResourceAsStream("/image/blueFishPressed.jpg"));
     private final Image blueFishReleased = new Image(getClass().getResourceAsStream("/image/blueFishReleased.png"));
@@ -40,72 +23,68 @@ public class fishSelectSceneController {
     private final Image orangeFishPressed = new Image(getClass().getResourceAsStream("/image/orangeFishPressed.jpg"));
     private final Image orangeFishReleased = new Image(getClass().getResourceAsStream("/image/orangeFishReleased.jpg"));
 
-    public void switchToGame(MouseEvent event) throws IOException {
-
-        root = FXMLLoader.load(getClass().getResource("/scene/gameScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    @Override
+    public void setAppController(Controller appController) {
+        this.appController = appController;
     }
 
-    //simulating image as button (blue fish)
-    public void blueFishPressed(MouseEvent event) throws IOException {
+    public void switchToGame(MouseEvent event) {
+        try {
+            appController.switchToScene("game");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void blueFishPressed(MouseEvent event) {
         blueFishImage.setImage(blueFishPressed);
-        System.out.println("blue pressed");
         switchToGame(event);
     }
-    public void blueFishEntered(){
+
+    public void blueFishEntered() {
         blueFishImage.setImage(blueFishPressed);
-        System.out.println("blue hovered");
     }
-    public void blueFishExited(){
+
+    public void blueFishExited() {
         blueFishImage.setImage(blueFishReleased);
-        System.out.println("blue exited");
     }
 
-    //simulating image as button (pink fish)
-    public void pinkFishPressed(MouseEvent event) throws IOException {
+    public void pinkFishPressed(MouseEvent event) {
         pinkFishImage.setImage(pinkFishPressed);
-        System.out.println("pink pressed");
         switchToGame(event);
     }
-    public void pinkFishEntered(){
+
+    public void pinkFishEntered() {
         pinkFishImage.setImage(pinkFishPressed);
-        System.out.println("pink hovered");
     }
-    public void pinkFishExited(){
+
+    public void pinkFishExited() {
         pinkFishImage.setImage(pinkFishReleased);
-        System.out.println("pink exited");
     }
 
-    //simulating image as button (orange fish)
-    public void orangeFishPressed(MouseEvent event) throws IOException {
+    public void orangeFishPressed(MouseEvent event) {
         orangeFishImage.setImage(orangeFishPressed);
-        System.out.println("orange pressed");
         switchToGame(event);
     }
-    public void orangeFishEntered(){
+
+    public void orangeFishEntered() {
         orangeFishImage.setImage(orangeFishPressed);
-        System.out.println("orange hovered");
     }
-    public void orangeFishExited(){
+
+    public void orangeFishExited() {
         orangeFishImage.setImage(orangeFishReleased);
-        System.out.println("orange exited");
     }
 
-    //simulating image as button (yellow fish)
-    public void yellowFishPressed(MouseEvent event) throws IOException {
+    public void yellowFishPressed(MouseEvent event) {
         yellowFishImage.setImage(yellowFishPressed);
-        System.out.println("yellow pressed");
         switchToGame(event);
     }
-    public void yellowFishEntered(){
+
+    public void yellowFishEntered() {
         yellowFishImage.setImage(yellowFishPressed);
-        System.out.println("yellow hovered");
     }
-    public void yellowFishExited(){
+
+    public void yellowFishExited() {
         yellowFishImage.setImage(yellowFishReleased);
-        System.out.println("yellow exited");
     }
 }

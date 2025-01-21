@@ -1,91 +1,67 @@
 package controller.tkfisch;
 
-import backend.Entity;
-import backend.Gameplay;
-import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Controller {
+    private final Stage primaryStage; // Reference to the primary stage
+    private final Map<String, Scene> scenes = new HashMap<>(); // Map for scenes
+    private final Map<String, SceneController> sceneControllers = new HashMap<>(); // Map for scene controllers
 
-    private Gameplay gameplay;
-
-    @FXML
-    private Canvas gameBoard;
-
-    @FXML
-    private Button rollDiceButton;
-
-    @FXML
-    private Button restartButton;
-
-    @FXML
-    private Label scoreLabel;
-
-    @FXML
-    private Label statusLabel;
-
-    // Initialize the controller and backend logic
-    public void initialize() {
-        gameplay = new Gameplay(); // Create a new Gameplay instance
-        drawGameBoard(); // Initial rendering of the game board
+    public Controller(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
-    @FXML
-    private void rollDice() {
-        gameplay.rollAndMove(); // Execute dice rolling and movement in the backend
-        gameplay.update(); // Update the game state
-        drawGameBoard(); // Refresh the game board
+    // Initialize scenes and load the first one
+    public void initApp() {
+        try {
+            // Load scenes and their controllers
+            addScene("start", "/scene/startScene.fxml");
+            addScene("select", "/scene/selectScene.fxml");
+            addScene("game", "/scene/gameScene.fxml");
+            addScene("dice", "/scene/diceScene.fxml");
+            addScene("diceResult", "/scene/diceResultScene.fxml");
 
-        // Check if the game is over
-        if (gameplay.isGameOver()) {
-            displayGameOver();
+            // Switch to the initial scene
+            switchToScene("start");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    @FXML
-    private void restartGame() throws IOException {
-        // Restart the game logic
-        gameplay = new Gameplay();
-        drawGameBoard();
+    // Add a scene and its controller
+    private void addScene(String name, String fxmlPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Scene scene = new Scene(loader.load());
 
-        // Reset UI labels
-        scoreLabel.setText("Fish: 0 | Boat: 0");
-        statusLabel.setText("");
+        // Retrieve the controller from the FXML and store it in sceneControllers
+        SceneController controller = loader.getController();
+        sceneControllers.put(name, controller);
+
+        // Inject AppController into the scene controller
+        controller.setAppController(this);
+
+        scenes.put(name, scene);
     }
 
-    private void drawGameBoard() {
-        GraphicsContext gc = gameBoard.getGraphicsContext2D();
-        gc.clearRect(0, 0, gameBoard.getWidth(), gameBoard.getHeight()); // Clear the canvas
-
-        for (Entity entity : gameplay.getEntities()) {
-            if (entity.getType() == Entity.Type.FISH) {
-                gc.setFill(javafx.scene.paint.Color.BLUE);
-                gc.fillOval(entity.getPosition() * 50, 300, 20, 20); // Adjust coordinates as needed
-            } else if (entity.getType() == Entity.Type.SHIP) {
-                gc.setFill(javafx.scene.paint.Color.RED);
-                gc.fillRect(entity.getPosition() * 50, 250, 30, 30); // Adjust coordinates as needed
-            }
+    // Switch to a scene by name
+    public void switchToScene(String name) {
+        Scene scene = scenes.get(name);
+        if (scene != null) {
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } else {
+            System.out.println("Scene not found: " + name);
         }
-
-        // Update the score label
-        scoreLabel.setText("Fish: " + gameplay.getFishPoints() + " | Boat: " + gameplay.getBoatPoints());
     }
 
-    private void displayGameOver() {
-        // Display the game over message based on the winner
-        String winner = gameplay.getFishPoints() > gameplay.getBoatPoints() ? "Fish Win!" : "Boats Win!";
-        if (gameplay.getFishPoints() == gameplay.getBoatPoints()) {
-            winner = "It's a Tie!";
-        }
-        statusLabel.setText("Game Over! " + winner);
-
-        // Disable the roll dice button after the game ends
-        rollDiceButton.setDisable(true);
+    // Get a specific scene controller by name
+    public SceneController getSceneController(String name) {
+        return sceneControllers.get(name);
     }
 }
