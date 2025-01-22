@@ -4,21 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee26e21d-c0ed-4f2b-8604-94147275c914" name="Changes" comment="intial commit">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="ee26e21d-c0ed-4f2b-8604-94147275c914" name="Changes" comment="add background images">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/tkfisch/gameSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/tkfisch/gameSceneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/scene/gameScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/scene/gameScene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/tkfisch/gameSceneController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/tkfisch/gameSceneController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/scene/diceResultScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/scene/diceResultScene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/scene/diceScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/scene/diceScene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/scene/fishSelectScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/scene/fishSelectScene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/scene/gameScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/scene/gameScene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/scene/selectScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/scene/selectScene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/scene/startScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/scene/startScene.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +35,9 @@
     &quot;assignee&quot;: &quot;Tanhien1&quot;
   }
 }</component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="7eb15222-6d4a-46d6-8fcd-a6947ce14c08" />
+  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/huson123/Tempo-Kleine-Fisch.git&quot;,
@@ -165,6 +155,9 @@
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\Dell\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ee26e21d-c0ed-4f2b-8604-94147275c914" name="Changes" comment="" />
@@ -225,7 +218,23 @@
       <option name="project" value="LOCAL" />
       <updated>1736422358492</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add background to game scene">
+      <option name="closed" value="true" />
+      <created>1737531421777</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1737531421777</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add background images">
+      <option name="closed" value="true" />
+      <created>1737531610126</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1737531610126</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,6 +253,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="intial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="intial commit" />
+    <MESSAGE value="add background to game scene" />
+    <MESSAGE value="add background images" />
+    <option name="LAST_COMMIT_MESSAGE" value="add background images" />
   </component>
 </project>
