@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import backend.Gameplay;
+
 public class selectSceneController implements SceneController {
     private Controller appController;
 
@@ -15,6 +17,8 @@ public class selectSceneController implements SceneController {
 
     public void fishPressed(MouseEvent event) {
         appController.switchToScene("fishSelect");
+        Gameplay gameplay = appController.getGameplay();
+        gameplay.setPlayerType("Fish"); // Update backend logic
     }
 
     public void shipPressed(MouseEvent event) {

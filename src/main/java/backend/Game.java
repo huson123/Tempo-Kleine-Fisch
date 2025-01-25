@@ -1,11 +1,9 @@
 package backend;
 
-import java.util.*; 
-
 public class Game {
     public static void main(String[] args)
     {
-        Gameplay game = new Gameplay(); 
+        Gameplay game = new Gameplay();
 
         while (!game.isGameOver())
         {

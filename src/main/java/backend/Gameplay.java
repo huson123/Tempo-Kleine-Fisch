@@ -12,8 +12,10 @@ public class Gameplay {
     private List<Entity> entities;
     private List<String> diceColor = new ArrayList<>(Arrays.asList("Red", "Green", "Blue", "Yellow", "Pink", "Orange")); 
     
-    private int boatScore; 
-    private int fishScore; 
+    private int shipScore;
+    private int fishScore;
+
+    private String playerType;
 
     // Constructor 
 
@@ -21,7 +23,7 @@ public class Gameplay {
     {
         this.entities = new ArrayList<>(); 
         this.random = new Random(); 
-        this.boatScore = 0;
+        this.shipScore = 0;
         this.fishScore = 0; 
 
         init(); 
@@ -33,9 +35,9 @@ public class Gameplay {
         return this.gameOver; 
     }
 
-    public int getBoatScore()
+    public int getShipScore()
     {
-        return this.boatScore; 
+        return this.shipScore;
     } 
 
     public int getFishScore()
@@ -62,7 +64,7 @@ public class Gameplay {
 
     public void addBoatScore()
     {
-        this.boatScore++; 
+        this.shipScore++;
     }
 
     public void addFishScore()
@@ -73,7 +75,7 @@ public class Gameplay {
     // Method 
     public void init()
     {
-        entities.add(new Ship("Ship", new ArrayList<>(Arrays.asList("Red", "Green")))); 
+        entities.add(new Ship("Ship", new ArrayList<>(Arrays.asList("Red", "Green"))));
         entities.add(new Fish("Fish1", "Blue"));
         entities.add(new Fish("Fish2", "Yellow"));
         entities.add(new Fish("Fish3", "Pink"));
@@ -137,11 +139,11 @@ public class Gameplay {
     
     public void printResult()
     {
-        if (getBoatScore() > getFishScore())
+        if (getShipScore() > getFishScore())
         {
             System.out.println("Boat Wins!");
         }
-        else if (getBoatScore() < getFishScore())
+        else if (getShipScore() < getFishScore())
         {
             System.out.println("Fish Wins!");
         }
@@ -149,5 +151,10 @@ public class Gameplay {
         {
             System.out.println("It's a Tie!");
         }
-    } 
+    }
+
+    public void setPlayerType(String playerType) {
+        this.playerType = playerType;
+        System.out.println("Player type set to: " + playerType);
+    }
 }

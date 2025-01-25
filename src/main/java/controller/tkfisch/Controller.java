@@ -1,5 +1,6 @@
 package controller.tkfisch;
 
+import backend.Gameplay;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -12,6 +13,7 @@ public class Controller {
     private final Stage primaryStage; // Reference to the primary stage
     private final Map<String, Scene> scenes = new HashMap<>(); // Map for scenes
     private final Map<String, SceneController> sceneControllers = new HashMap<>(); // Map for scene controllers
+    private final Gameplay gameplay = new Gameplay();
 
     public Controller(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -63,5 +65,9 @@ public class Controller {
     // Get a specific scene controller by name
     public SceneController getSceneController(String name) {
         return sceneControllers.get(name);
+    }
+
+    public Gameplay getGameplay() {
+        return gameplay;
     }
 }
