@@ -19,9 +19,12 @@ public class selectSceneController implements SceneController {
         appController.switchToScene("fishSelect");
         Gameplay gameplay = appController.getGameplay();
         gameplay.setPlayerType("Fish"); // Update backend logic
+        appController.switchToScene("game");
     }
 
     public void shipPressed(MouseEvent event) {
+        Gameplay gameplay = appController.getGameplay();
+        gameplay.setPlayerType("Ship");
         appController.switchToScene("game");
     }
 

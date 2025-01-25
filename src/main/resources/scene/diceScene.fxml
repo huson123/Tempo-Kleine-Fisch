@@ -13,7 +13,7 @@
             <Font name="Book Antiqua Bold" size="40.0" />
          </font>
       </Label>
-      <Button layoutX="230.0" layoutY="210.0" mnemonicParsing="false" onAction="#switchToGame" prefHeight="74.0" prefWidth="138.0" text="Roll">
+      <Button layoutX="230.0" layoutY="210.0" mnemonicParsing="false" onAction="#rollDice" prefHeight="74.0" prefWidth="138.0" text="Roll">
          <font>
             <Font size="30.0" />
          </font>

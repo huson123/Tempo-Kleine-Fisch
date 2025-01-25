@@ -62,7 +62,7 @@ public class Gameplay {
         this.gameOver = true;
     }
 
-    public void addBoatScore()
+    public void addShipScore()
     {
         this.shipScore++;
     }
@@ -82,7 +82,7 @@ public class Gameplay {
         entities.add(new Fish("Fish4", "Orange"));
     }
 
-    public void rollAndMove()
+    public String rollAndMove()
     {
         List<String> colors = getDiceColor();
         
@@ -98,6 +98,8 @@ public class Gameplay {
                 entity.move(); 
             }
         }
+
+        return color;
     }
 
     public void update() {
@@ -120,7 +122,7 @@ public class Gameplay {
                 // Check for collisions with fish
                 for (Entity fish : entities) {
                     if (fish.getType() == Entity.Type.FISH && fish.getPosition() == entity.getPosition()) {
-                        addBoatScore();
+                        addShipScore();
                         ((Ship) entity).addColor(fish.getColors().get(0));
                         entitiesToRemove.add(fish); // Mark the fish for removal
                     }

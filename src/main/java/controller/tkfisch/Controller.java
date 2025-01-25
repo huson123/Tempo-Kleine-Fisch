@@ -40,16 +40,13 @@ public class Controller {
     private void addScene(String name, String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Scene scene = new Scene(loader.load());
-
-        // Retrieve the controller from the FXML and store it in sceneControllers
         SceneController controller = loader.getController();
-        sceneControllers.put(name, controller);
 
-        // Inject AppController into the scene controller
         controller.setAppController(this);
-
+        sceneControllers.put(name, controller);
         scenes.put(name, scene);
     }
+
 
     // Switch to a scene by name
     public void switchToScene(String name) {

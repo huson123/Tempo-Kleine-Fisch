@@ -1,15 +1,10 @@
 package controller.tkfisch;
 
+import backend.Gameplay;
 import javafx.fxml.FXML;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class diceSceneController implements SceneController {
     private Controller appController;
-
-    private final List<String> colours = List.of("red", "blue", "yellow", "green", "orange", "pink");
 
     @Override
     public void setAppController(Controller appController) {
@@ -17,22 +12,16 @@ public class diceSceneController implements SceneController {
     }
 
     @FXML
-    public void switchToGame() {
-        try {
-            // Roll the dice and pass the result to the next scene
-            String result = rollDice();
-            diceResultSceneController resultController =
-                    (diceResultSceneController) appController.getSceneController("diceResult");
-            resultController.displayResult(result);
+    public void rollDice() {
+        Gameplay gameplay = appController.getGameplay();
 
-            appController.switchToScene("diceResult");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+        // Perform dice roll and movement
+        String diceResult = gameplay.rollAndMove();
 
-    private String rollDice() {
-        Random rand = new Random();
-        return colours.get(rand.nextInt(colours.size()));
+        // Update the diceResultSceneController with the current state
+        diceResultSceneController resultController = (diceResultSceneController) appController.getSceneController("diceResult");
+        resultController.displayResult(diceResult);
+
+        appController.switchToScene("diceResult");
     }
 }

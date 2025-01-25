@@ -1,6 +1,7 @@
 package controller.tkfisch;
 
 import javafx.scene.input.MouseEvent;
+import backend.Gameplay;
 
 public class gameSceneController implements SceneController {
     private Controller appController;
@@ -11,6 +12,13 @@ public class gameSceneController implements SceneController {
     }
 
     public void dicePressed(MouseEvent event) {
-        appController.switchToScene("dice");
+        Gameplay gameplay = appController.getGameplay();
+
+        // Roll the dice and move entities
+        gameplay.rollAndMove();
+        gameplay.update();
+
+        // Switch to diceResult scene to display the result
+        appController.switchToScene("diceResult");
     }
 }

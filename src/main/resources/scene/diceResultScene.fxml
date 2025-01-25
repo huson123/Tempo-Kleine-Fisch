@@ -12,7 +12,7 @@
             <Font name="Book Antiqua Bold" size="50.0" />
          </font>
       </Label>
-      <Button layoutX="216.0" layoutY="234.0" mnemonicParsing="false" onAction="#switchToGame" prefHeight="42.0" prefWidth="168.0" text="Continue">
+      <Button layoutX="216.0" layoutY="234.0" mnemonicParsing="false" onAction="#continueToGame" prefHeight="42.0" prefWidth="168.0" text="Continue">
          <font>
             <Font size="30.0" />
          </font>
