@@ -12,8 +12,10 @@ public class Gameplay {
     private List<Entity> entities;
     private List<String> diceColor = new ArrayList<>(Arrays.asList("Red", "Green", "Blue", "Yellow", "Pink", "Orange")); 
     
-    private int boatScore; 
-    private int fishScore; 
+    private int shipScore;
+    private int fishScore;
+
+    private String playerType;
 
     // Constructor 
 
@@ -21,7 +23,7 @@ public class Gameplay {
     {
         this.entities = new ArrayList<>(); 
         this.random = new Random(); 
-        this.boatScore = 0;
+        this.shipScore = 0;
         this.fishScore = 0; 
 
         init(); 
@@ -33,9 +35,9 @@ public class Gameplay {
         return this.gameOver; 
     }
 
-    public int getBoatScore()
+    public int getShipScore()
     {
-        return this.boatScore; 
+        return this.shipScore;
     } 
 
     public int getFishScore()
@@ -60,9 +62,9 @@ public class Gameplay {
         this.gameOver = true;
     }
 
-    public void addBoatScore()
+    public void addShipScore()
     {
-        this.boatScore++; 
+        this.shipScore++;
     }
 
     public void addFishScore()
@@ -73,27 +75,29 @@ public class Gameplay {
     // Method 
     public void init()
     {
-        entities.add(new Ship("Ship", new ArrayList<>(Arrays.asList("Red", "Green")))); 
-        entities.add(new Fish("Fish1", "Blue"));
-        entities.add(new Fish("Fish2", "Yellow"));
-        entities.add(new Fish("Fish3", "Pink"));
-        entities.add(new Fish("Fish4", "Orange"));
+        entities.add(new Ship("ship", new ArrayList<>(Arrays.asList("Red", "Green"))));
+        entities.add(new Fish(250,216,"blueFish", "Blue"));
+        entities.add(new Fish(250,230,"yellowFish", "Yellow"));
+        entities.add(new Fish(250,244,"pinkFish", "Pink"));
+        entities.add(new Fish(250,258,"orangeFish", "Orange"));
     }
 
-    public void rollAndMove()
+    public String roll()
     {
         List<String> colors = getDiceColor();
         
         // roll 
         int randomIndex = random.nextInt(colors.size());
         String color = colors.get(randomIndex); 
-
+        return color;
+    }
+    public void move (String color){
         // move
         for (Entity entity : entities)
         {
             if (entity.getColors().contains(color))
             {
-                entity.move(); 
+                entity.move();
             }
         }
     }
@@ -118,7 +122,7 @@ public class Gameplay {
                 // Check for collisions with fish
                 for (Entity fish : entities) {
                     if (fish.getType() == Entity.Type.FISH && fish.getPosition() == entity.getPosition()) {
-                        addBoatScore();
+                        addShipScore();
                         ((Ship) entity).addColor(fish.getColors().get(0));
                         entitiesToRemove.add(fish); // Mark the fish for removal
                     }
@@ -137,11 +141,11 @@ public class Gameplay {
     
     public void printResult()
     {
-        if (getBoatScore() > getFishScore())
+        if (getShipScore() > getFishScore())
         {
             System.out.println("Boat Wins!");
         }
-        else if (getBoatScore() < getFishScore())
+        else if (getShipScore() < getFishScore())
         {
             System.out.println("Fish Wins!");
         }
@@ -149,5 +153,10 @@ public class Gameplay {
         {
             System.out.println("It's a Tie!");
         }
-    } 
+    }
+
+    public void setPlayerType(String playerType) {
+        this.playerType = playerType;
+        System.out.println("Player type set to: " + playerType);
+    }
 }

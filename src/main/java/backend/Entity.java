@@ -10,13 +10,17 @@ public abstract class Entity {
 
     private int position; 
     private String name; 
-    protected List<String> colors; 
+    protected List<String> colors;
+    private int xPos;
+    private  int yPos;
 
     // Constructor 
-    public Entity(Type type, int position, String name, List<String> colors)
+    public Entity(Type type, int position, int xPos, int yPos, String name, List<String> colors)
     {
         this.type = type; 
-        this.position = position; 
+        this.position = position;
+        this.xPos = xPos;
+        this.yPos = yPos;
         this.name = name; 
         this.colors = colors;
     }
@@ -45,21 +49,22 @@ public abstract class Entity {
     // Method
     public void move()
     {
-        this.position++; 
+        this.position++;
+        this.xPos += 32;
     }
 }
 
 class Fish extends Entity {
-    public Fish(String name, String color)
+    public Fish(int xPos, int yPos, String name, String color)
     {
-        super(Type.FISH, 0, name, Arrays.asList(color)); 
+        super(Type.FISH, 0, xPos, yPos,  name, Arrays.asList(color));
     }
 }
 
 class Ship extends Entity {
     public Ship(String name, List<String> colors)
     {
-        super(Type.SHIP, -5, name, colors); 
+        super(Type.SHIP, -5, 80, 198, name, colors);
     }
 
     public void addColor(String color)

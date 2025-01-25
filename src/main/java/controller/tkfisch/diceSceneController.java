@@ -1,6 +1,8 @@
 package controller.tkfisch;
 
+import backend.Gameplay;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,22 +10,23 @@ import java.util.Random;
 
 public class diceSceneController implements SceneController {
     private Controller appController;
-
-    private final List<String> colours = List.of("red", "blue", "yellow", "green", "orange", "pink");
+    private Gameplay gameplay;
+    @FXML
+    private ImageView dice;
 
     @Override
     public void setAppController(Controller appController) {
         this.appController = appController;
     }
 
-    @FXML
+    public void intialize (){
+        //TODO ADD BACKGROUND ANIMATION
+    }
     public void switchToGame() {
         try {
             // Roll the dice and pass the result to the next scene
-            String result = rollDice();
-            diceResultSceneController resultController =
-                    (diceResultSceneController) appController.getSceneController("diceResult");
-            resultController.displayResult(result);
+            String result = gameplay.roll();
+
 
             appController.switchToScene("diceResult");
         } catch (Exception e) {
@@ -31,8 +34,4 @@ public class diceSceneController implements SceneController {
         }
     }
 
-    private String rollDice() {
-        Random rand = new Random();
-        return colours.get(rand.nextInt(colours.size()));
-    }
 }
