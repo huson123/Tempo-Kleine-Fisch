@@ -2,6 +2,7 @@ package controller.tkfisch;
 
 import backend.Gameplay;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
@@ -14,15 +15,24 @@ public class diceSceneController implements SceneController {
     private String diceResult = "/animation/dice/diceResult";
     private String resultColor = null;
     @FXML
-    private ImageView dice;
+    private ImageView dice = new ImageView();
+
 
     @Override
     public void setAppController(Controller appController) {
         this.appController = appController;
     }
 
-    public void intialize (){
+
+    public void initialize (){
         //TODO ADD BACKGROUND ANIMATION
+        dice.setImage (new Image(getClass().getResourceAsStream("/image/dice.png")));
+        dice.setFitWidth(40);
+        dice.setX(100);
+        dice.setY(100);
+        dice.setPreserveRatio(true);
+        dice.setSmooth(true);
+        dice.setCache(true);
     }
     public void switchToGame() {
         try {
