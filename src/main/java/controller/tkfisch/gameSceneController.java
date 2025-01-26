@@ -18,7 +18,7 @@ public class gameSceneController implements SceneController {
     @FXML
     private ImageView yellowFish;
 
-    diceResultSceneController diceSC = new diceResultSceneController();
+    diceSceneController diceSC = new diceSceneController();
     private String resultColor = diceSC.getResultColor(); ;
 
     @Override

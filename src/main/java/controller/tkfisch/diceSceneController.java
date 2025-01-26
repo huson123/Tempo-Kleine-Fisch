@@ -11,6 +11,8 @@ import java.util.Random;
 public class diceSceneController implements SceneController {
     private Controller appController;
     private Gameplay gameplay;
+    private String diceResult = "/animation/dice/diceResult";
+    private String resultColor = null;
     @FXML
     private ImageView dice;
 
@@ -22,16 +24,26 @@ public class diceSceneController implements SceneController {
     public void intialize (){
         //TODO ADD BACKGROUND ANIMATION
     }
-    public void switchToDiceResult() {
+    public void switchToGame() {
         try {
-            // Roll the dice and pass the result to the next scene
-            appController.switchToScene("diceResult");
+            appController.switchToScene("game");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     public String rollDice (){
         return gameplay.roll();
+    }
+    public void displayResult() {
+        //play animation according to result colour
+        resultColor = rollDice();
+        diceResult += resultColor;
+        System.out.println(resultColor);
+        appController.playAnimation(diceResult,22,0.5,dice);
+
+    }
+    public String getResultColor(){
+        return resultColor;
     }
 
 }
