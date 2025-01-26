@@ -4,7 +4,7 @@ import java.util.*;
 
 public abstract class Entity {
     public enum Type {
-        FISH, SHIP
+        fish, SHIP
     }
     private Type type; 
 
@@ -12,7 +12,7 @@ public abstract class Entity {
     private String name; 
     protected List<String> colors;
     private int xPos;
-    private  int yPos;
+    private int yPos;
 
     // Constructor 
     public Entity(Type type, int position, int xPos, int yPos, String name, List<String> colors)
@@ -57,7 +57,7 @@ public abstract class Entity {
 class Fish extends Entity {
     public Fish(int xPos, int yPos, String name, String color)
     {
-        super(Type.FISH, 0, xPos, yPos,  name, Arrays.asList(color));
+        super(Type.fish, 0, xPos, yPos,  name, Arrays.asList(color));
     }
 }
 

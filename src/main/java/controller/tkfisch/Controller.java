@@ -87,6 +87,26 @@ public class Controller {
         timeline.play();
 
     }
+    public void playIdleAnimation(String imgURL, int frames, double duration, ImageView animatingObj)
+            throws  IOException{
+        //play inf loop of idle animation
+        for (int i =0; i<= frames; i++){
+            Image img;
+            if (i < 10){
+                img = new Image(getClass().getResourceAsStream(imgURL + "frame000" + i + ".png"));
+            }
+            else {
+                img = new Image(getClass().getResourceAsStream(imgURL + "frame00" + i + ".png"));
+            }
+            KeyFrame keyFrame = new KeyFrame(
+                    Duration.seconds(i * duration),
+                    e -> animatingObj.setImage(img));
+            timeline.getKeyFrames().add(keyFrame);
+        }
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+    }
     public void setBackgroundAnimation(String imgURL, int frames, double duration, AnchorPane pane) throws IOException {
         //set background to repeat pics as animation
         for (int i =0; i<= frames; i++){

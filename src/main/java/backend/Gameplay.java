@@ -91,16 +91,7 @@ public class Gameplay {
         String color = colors.get(randomIndex); 
         return color;
     }
-    public void move (String color){
-        // move
-        for (Entity entity : entities)
-        {
-            if (entity.getColors().contains(color))
-            {
-                entity.move();
-            }
-        }
-    }
+
 
     public void update() {
         List<Entity> entitiesToRemove = new ArrayList<>(); // To collect entities marked for removal
@@ -111,7 +102,7 @@ public class Gameplay {
             Entity entity = iterator.next();
     
             // If the entity is a fish
-            if (entity.getType() == Entity.Type.FISH) {
+            if (entity.getType() == Entity.Type.fish) {
                 if (entity.getPosition() >= SEA) {
                     addFishScore();
                     entitiesToRemove.add(entity); // Mark the fish for removal
@@ -121,7 +112,7 @@ public class Gameplay {
             else if (entity.getType() == Entity.Type.SHIP) {
                 // Check for collisions with fish
                 for (Entity fish : entities) {
-                    if (fish.getType() == Entity.Type.FISH && fish.getPosition() == entity.getPosition()) {
+                    if (fish.getType() == Entity.Type.fish && fish.getPosition() == entity.getPosition()) {
                         addShipScore();
                         ((Ship) entity).addColor(fish.getColors().get(0));
                         entitiesToRemove.add(fish); // Mark the fish for removal
@@ -134,7 +125,7 @@ public class Gameplay {
         entities.removeAll(entitiesToRemove);
     
         // End the game if no fish are left
-        if (entities.stream().noneMatch(e -> e.getType() == Entity.Type.FISH)) {
+        if (entities.stream().noneMatch(e -> e.getType() == Entity.Type.fish)) {
             setGameOver();
         }
     }

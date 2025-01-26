@@ -10,7 +10,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         // Initialize the Controller with the primary stage
         Controller appController = new Controller(primaryStage);
-
         // Initialize scenes and load the first one
         appController.initApp();
         Gameplay gameplay = new Gameplay();
