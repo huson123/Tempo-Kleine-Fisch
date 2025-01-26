@@ -22,16 +22,16 @@ public class diceSceneController implements SceneController {
     public void intialize (){
         //TODO ADD BACKGROUND ANIMATION
     }
-    public void switchToGame() {
+    public void switchToDiceResult() {
         try {
             // Roll the dice and pass the result to the next scene
-            String result = gameplay.roll();
-
-
             appController.switchToScene("diceResult");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public String rollDice (){
+        return gameplay.roll();
     }
 
 }
