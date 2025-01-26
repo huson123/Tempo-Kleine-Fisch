@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 
 public class diceResultSceneController implements SceneController {
     private Controller appController;
-    private String diceResult = "/aninmation/dice/diceResult";
+    private String diceResult = "/animation/dice/diceResult";
     private String resultColor = null;
     @FXML
     private ImageView dice;
@@ -32,6 +32,7 @@ public class diceResultSceneController implements SceneController {
         diceSceneController diceSC = new diceSceneController();
         resultColor = diceSC.rollDice();
         diceResult += resultColor;
+        System.out.println(resultColor);
         appController.playAnimation(diceResult,22,0.5,dice);
 
     }
