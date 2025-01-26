@@ -44,7 +44,9 @@ public abstract class Entity {
     public List<String> getColors()
     {
         return this.colors; 
-    }  
+    }
+
+    public int getxPos(){return xPos;}
     
     // Method
     public void move()

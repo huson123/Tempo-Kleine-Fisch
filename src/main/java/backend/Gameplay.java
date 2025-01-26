@@ -88,8 +88,7 @@ public class Gameplay {
         
         // roll 
         int randomIndex = random.nextInt(colors.size());
-        String color = colors.get(randomIndex); 
-        return color;
+        return colors.get(randomIndex);
     }
 
 

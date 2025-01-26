@@ -2,6 +2,8 @@ package controller.tkfisch;
 
 import backend.Entity;
 import backend.Gameplay;
+import javafx.animation.SequentialTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,83 +18,141 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class gameSceneController implements SceneController {
-    private Stage stage = new Stage();
-    private Controller appController = new Controller(stage);
+    private Controller appController;
     private final String diceIdleUrl = "/animation/dice/diceIdle/";
-    private Gameplay gameplay = new Gameplay();
-    private List<Entity> entities = gameplay.getEntities();
+    private final Gameplay gameplay = new Gameplay();
+    private final List<Entity> entities = gameplay.getEntities();
+
+    //create timeline to play idle animation for entities
     @FXML
     private ImageView ship;
     @FXML
     private ImageView blueFish;
     private final String blueFishMoveURL = "/animation/fish/move/blueFishMove/";
     private final String blueFishStillURL = "/animation/fish/idle/blueFishStill/";
+    private Timeline blueFishIdle = fishIdle(blueFishStillURL,blueFish);
 
     @FXML
     private ImageView orangeFish;
+    private Timeline orangeFishIdle = fishIdle(blueFishStillURL,orangeFish);
+
     @FXML
     private ImageView pinkFish;
+    private Timeline pinkFishIdle = fishIdle(blueFishStillURL,pinkFish);
+
     @FXML
     private ImageView yellowFish;
+    private Timeline yellowFishIdle = fishIdle(blueFishStillURL,yellowFish);
+
     @FXML
     private ImageView dice;
 
     diceSceneController diceSC = new diceSceneController();
-    private String resultColor = null;
+
+    public gameSceneController() throws IOException {
+    }
 
     @Override
     public void setAppController(Controller appController) {
         this.appController = appController;
     }
-    public void initialize() throws IOException, InterruptedException {
+    public void initialize() {
         //TODO add background animation
+        blueFishIdle.play();
+        yellowFishIdle.play();
+        pinkFishIdle.play();
+        orangeFishIdle.play();
     }
 
 
-    public void move (String color) throws IOException, InterruptedException {
-        // move
+    public void move (String color) throws IOException {
+        // TODO MIGHT NEED TO REMOVE X AND Y POS IN ENTITY AS REDUNDANCY
+        Timeline tl = new Timeline();
         for (Entity entity : entities)
         {
             if (entity.getColors().contains(color))
             {
-                System.out.println(color);
+                entity.move();
+                System.out.println(entity.getPosition());
+                System.out.println(entity.getxPos());
                 switch (color){
                     case "Blue":
                         System.out.println("blue is moved");
-                        fishMove(blueFishMoveURL,blueFish);
-                        TimeUnit.SECONDS.sleep((long)21 * (long)0.2);
-                        fishIdle(blueFishStillURL,blueFish);
-                        entity.move();
-                }
+                        blueFishIdle.pause();
+                        tl = fishMove(blueFishMoveURL,blueFish);
+                        tl.play();
+                        tl.setOnFinished(e ->{
+                            moveImageView(32, blueFish);
+                            blueFishIdle.play();
+                        });
+                        break;
+                    case "Pink":
+                        System.out.println("pink is moved");
+                        moveImageView(32, pinkFish);
+                        pinkFishIdle.pause();
+                        tl = fishMove(blueFishMoveURL,pinkFish);
+                        tl.play();
+                        tl.setOnFinished(e ->{
+                            moveImageView(32, pinkFish);
+                            pinkFishIdle.play();
+                        });
 
+                        break;
+                    case "Yellow":
+                        System.out.println("yellow is moved");
+                        moveImageView(32, yellowFish);
+                        yellowFishIdle.pause();
+                        tl = fishMove(blueFishMoveURL,yellowFish);
+                        tl.play();
+                        tl.setOnFinished(e ->{
+                            moveImageView(32, yellowFish);
+                            yellowFishIdle.play();
+                        });
+                        break;
+                    case "Orange":
+                        System.out.println("orange is moved");
+                        moveImageView(32, orangeFish);
+                        orangeFishIdle.pause();
+                        tl = fishMove(blueFishMoveURL,orangeFish);
+                        tl.play();
+                        tl.setOnFinished(e ->{
+                            moveImageView(32, orangeFish);
+                            orangeFishIdle.play();
+                        });
+                        break;
+                }
             }
         }
     }
-
-    //FISH SECTION
-    public void fishMove (String moveURL,ImageView fish) throws IOException {
-        appController.playAnimation(moveURL,21,0.2,fish);
+    //MISC
+    public void moveImageView (int amount, ImageView obj){
+        //move image view obj on x axis positive
+        obj.setX(obj.getX() + amount);
     }
-    public void fishIdle (String idleURL, ImageView fish) throws IOException {
-        appController.playIdleAnimation(idleURL,12,0.2,fish);
+    //FISH SECTION
+    public Timeline fishMove (String moveURL, ImageView fish) throws IOException {
+        return appController.playAnimation(moveURL,21,0.2,fish);
+    }
+    public Timeline fishIdle (String idleURL, ImageView fish) throws IOException {
+        return appController.playIdleAnimation(idleURL,12,0.2,fish);
     }
 
     //SHIP SECTION
-    public void shipMove (String moveURL,ImageView ship) throws IOException {
-        appController.playAnimation(moveURL,7,0.2,ship);
+    public Timeline shipMove (String moveURL,ImageView ship) throws IOException {
+        return appController.playAnimation(moveURL,7,0.2,ship);
     }
-    public void shipCatch (String catchURL, ImageView ship) throws IOException {
-        appController.playAnimation(catchURL,12,0.2,ship);
+    public Timeline shipCatch (String catchURL, ImageView ship) throws IOException {
+        return appController.playAnimation(catchURL,12,0.2,ship);
     }
 
     //DICE SECTION
     public void dicePressed(MouseEvent event) throws IOException {
-
         appController.switchToScene("dice");
     }
     public void diceEntered(MouseEvent event) throws IOException {
         System.out.println("dice hovered");
-        appController.playAnimation(diceIdleUrl,12, 0.2, dice);
+        Timeline tl = appController.playAnimation(diceIdleUrl,12, 0.2, dice);
+        tl.play();
     }
     public void diceExited(MouseEvent event){
         System.out.println("dice exited");

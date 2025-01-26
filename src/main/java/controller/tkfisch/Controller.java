@@ -2,6 +2,7 @@ package controller.tkfisch;
 
 import backend.Gameplay;
 import javafx.animation.KeyFrame;
+import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -67,9 +68,9 @@ public class Controller {
             System.out.println("Scene not found: " + name);
         }
     }
-    public void playAnimation(String imgURL, int frames, double duration, ImageView animatingObj)
+    public Timeline playAnimation(String imgURL, int frames, double duration, ImageView animatingObj)
     throws  IOException{
-        //play a single cycle of animation on a given obj
+        //return a timeline to play a single cycle of animation on a given obj
         Timeline timeline = new Timeline();
         for (int i =0; i<= frames; i++){
             Image img;
@@ -85,11 +86,11 @@ public class Controller {
             timeline.getKeyFrames().add(keyFrame);
             }
         timeline.setCycleCount(1);
-        timeline.play();
+        return timeline;
     }
-    public void playIdleAnimation(String imgURL, int frames, double duration, ImageView animatingObj)
+    public Timeline playIdleAnimation(String imgURL, int frames, double duration, ImageView animatingObj)
             throws  IOException{
-        //play inf loop of idle animation
+        //return a timeline to play inf loop of idle animation
         Timeline timeline = new Timeline();
         for (int i =0; i<= frames; i++){
             Image img;
@@ -105,11 +106,11 @@ public class Controller {
             timeline.getKeyFrames().add(keyFrame);
         }
         timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+        return timeline;
 
     }
-    public void setBackgroundAnimation(String imgURL, int frames, double duration, AnchorPane pane) throws IOException {
-        //set background to repeat pics as animation
+    public Timeline setBackgroundAnimation(String imgURL, int frames, double duration, AnchorPane pane) throws IOException {
+        //return a timeline to set background to repeat pics as animation
         Timeline timeline = new Timeline();
         for (int i =0; i<= frames; i++){
             Image img;
@@ -125,8 +126,12 @@ public class Controller {
             timeline.getKeyFrames().add(keyFrame);
         }
         timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+        return timeline;
     };
+
+    public SequentialTransition setSequenceAnimation(Timeline ani1, Timeline ani2){
+        return new SequentialTransition(ani1,ani2);
+    }
 
     // Get a specific scene controller by name
     public SceneController getSceneController(String name) {
