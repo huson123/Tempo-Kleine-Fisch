@@ -67,7 +67,8 @@ public class Controller {
             System.out.println("Scene not found: " + name);
         }
     }
-    public void playAnimation(String imgURL, int frames, double duration, ImageView animatingObj){
+    public void playAnimation(String imgURL, int frames, double duration, ImageView animatingObj)
+    throws  IOException{
         //play a single cycle of animation on a given obj
         for (int i =0; i<= frames; i++){
             Image img;
