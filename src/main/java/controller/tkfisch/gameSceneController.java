@@ -44,20 +44,10 @@ public class gameSceneController implements SceneController {
     public void setAppController(Controller appController) {
         this.appController = appController;
     }
-
     public void initialize() throws IOException, InterruptedException {
         //TODO add background animation
-        gameLoop();
     }
-    public void gameLoop() throws IOException, InterruptedException {
-        while (!gameplay.isGameOver()){
-            resultColor = diceSC.getResultColor();
-            if (resultColor != null){
-                move(resultColor);
-                resultColor = null;
-            }
-        }
-    }
+
 
     public void move (String color) throws IOException, InterruptedException {
         // move
@@ -65,6 +55,7 @@ public class gameSceneController implements SceneController {
         {
             if (entity.getColors().contains(color))
             {
+                System.out.println(color);
                 switch (color){
                     case "Blue":
                         System.out.println("blue is moved");

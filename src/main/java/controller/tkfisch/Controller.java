@@ -20,7 +20,7 @@ public class Controller {
     private final Map<String, Scene> scenes = new HashMap<>(); // Map for scenes
     private final Map<String, SceneController> sceneControllers = new HashMap<>(); // Map for scene controllers
     private final Gameplay gameplay = new Gameplay();
-    private Timeline timeline = new Timeline();
+
 
     public Controller(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -70,6 +70,7 @@ public class Controller {
     public void playAnimation(String imgURL, int frames, double duration, ImageView animatingObj)
     throws  IOException{
         //play a single cycle of animation on a given obj
+        Timeline timeline = new Timeline();
         for (int i =0; i<= frames; i++){
             Image img;
             if (i < 10){
@@ -85,11 +86,11 @@ public class Controller {
             }
         timeline.setCycleCount(1);
         timeline.play();
-
     }
     public void playIdleAnimation(String imgURL, int frames, double duration, ImageView animatingObj)
             throws  IOException{
         //play inf loop of idle animation
+        Timeline timeline = new Timeline();
         for (int i =0; i<= frames; i++){
             Image img;
             if (i < 10){
@@ -109,6 +110,7 @@ public class Controller {
     }
     public void setBackgroundAnimation(String imgURL, int frames, double duration, AnchorPane pane) throws IOException {
         //set background to repeat pics as animation
+        Timeline timeline = new Timeline();
         for (int i =0; i<= frames; i++){
             Image img;
             if (i < 10){
@@ -122,7 +124,7 @@ public class Controller {
                     e -> pane.setBackground(bg));
             timeline.getKeyFrames().add(keyFrame);
         }
-        timeline.setCycleCount(1);
+        timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     };
 

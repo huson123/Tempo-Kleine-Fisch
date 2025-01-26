@@ -18,7 +18,7 @@ public class diceSceneController implements SceneController {
     private Controller appController = new Controller(stage);
     private Gameplay gameplay = new Gameplay();
     private String diceResult = "/animation/dice/result/diceResult";
-    private String resultColor = null;
+    private String resultColor;
     @FXML
     private ImageView dice;
     @FXML
@@ -55,6 +55,7 @@ public class diceSceneController implements SceneController {
         }
         //play animation according to result colour
         resultColor = rollDice();
+        setResultColor(resultColor);
         String tempResult = diceResult + resultColor + "/";
         System.out.println(resultColor);
         System.out.println(tempResult);
@@ -65,6 +66,9 @@ public class diceSceneController implements SceneController {
     }
     public String getResultColor(){
         return resultColor;
+    }
+    public void setResultColor(String color){
+        this.resultColor = color;
     }
 
 }
