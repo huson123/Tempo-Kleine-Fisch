@@ -1,0 +1,17 @@
+package backend;
+
+public class Game {
+    public static void main(String[] args)
+    {
+        Gameplay game = new Gameplay();
+
+        while (!game.isGameOver())
+        {
+            game.rollAndMove(); 
+            game.update(); 
+            System.out.println("");
+        }
+
+        game.printResult(); 
+    }
+}
