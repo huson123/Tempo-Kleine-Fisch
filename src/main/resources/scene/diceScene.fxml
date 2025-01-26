@@ -14,11 +14,11 @@
             <Font name="Book Antiqua Bold" size="40.0" />
          </font>
       </Label>
-      <ImageView fx:id="dice" fitHeight="308.0" fitWidth="303.0" layoutX="139.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="dice" fitHeight="308.0" fitWidth="303.0" layoutX="139.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../animation/dice/diceIdle/frame0000.png" />
+            <Image url="@../animation/dice/result/diceResultRed/frame0000.png" />
          </image>
       </ImageView>
-      <Button layoutX="215.0" layoutY="303.0" mnemonicParsing="false" onAction="#displayResult" prefHeight="55.0" prefWidth="150.0" text="Button" />
+      <Button fx:id="button" layoutX="215.0" layoutY="303.0" mnemonicParsing="false" onAction="#displayResult" prefHeight="55.0" prefWidth="150.0" text="Roll" />
    </children>
 </AnchorPane>

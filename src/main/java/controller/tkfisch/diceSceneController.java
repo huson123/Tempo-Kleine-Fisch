@@ -3,6 +3,7 @@ package controller.tkfisch;
 import backend.Gameplay;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -20,6 +21,10 @@ public class diceSceneController implements SceneController {
     private String resultColor = null;
     @FXML
     private ImageView dice;
+    @FXML
+    private Button button;
+
+    private boolean buttonFlag = false;
 
 
     @Override
@@ -42,12 +47,20 @@ public class diceSceneController implements SceneController {
         return gameplay.roll();
     }
     public void displayResult() throws IOException {
+        if (buttonFlag){
+            buttonFlag = false;
+            button.setText("Roll");
+            switchToGame();
+            return;
+        }
         //play animation according to result colour
         resultColor = rollDice();
         String tempResult = diceResult + resultColor + "/";
         System.out.println(resultColor);
         System.out.println(tempResult);
         appController.playAnimation(tempResult,22,0.1,dice);
+        buttonFlag = true;
+        button.setText("Continue");
 
     }
     public String getResultColor(){
