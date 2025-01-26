@@ -86,6 +86,24 @@ public class Controller {
         timeline.play();
 
     }
+    public void setBackgroundAnimation(String imgURL, int frames, double duration, AnchorPane pane) throws IOException {
+        //set background to repeat pics as animation
+        for (int i =0; i<= frames; i++){
+            Image img;
+            if (i < 10){
+                img = new Image(getClass().getResourceAsStream(imgURL + "frame000" + i + ".png"));
+            }
+            else {
+                img = new Image(getClass().getResourceAsStream(imgURL + "frame00" + i + ".png"));
+            }
+            Background bg = new Background(new BackgroundImage(img, BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.CENTER, BackgroundSize.DEFAULT));
+            KeyFrame keyFrame = new KeyFrame(Duration.seconds(i * duration), // Display each image for x seconds
+                    e -> pane.setBackground(bg));
+            timeline.getKeyFrames().add(keyFrame);
+        }
+        timeline.setCycleCount(1);
+        timeline.play();
+    };
 
     // Get a specific scene controller by name
     public SceneController getSceneController(String name) {
