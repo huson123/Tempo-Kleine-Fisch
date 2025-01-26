@@ -1,10 +1,15 @@
 package controller.tkfisch;
 
 import backend.Gameplay;
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,7 +20,7 @@ public class Controller {
     private final Map<String, Scene> scenes = new HashMap<>(); // Map for scenes
     private final Map<String, SceneController> sceneControllers = new HashMap<>(); // Map for scene controllers
     private final Gameplay gameplay = new Gameplay();
-    private Timeline timeline;
+    private Timeline timeline = new Timeline();
 
     public Controller(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -63,9 +68,23 @@ public class Controller {
             System.out.println("Scene not found: " + name);
         }
     }
-    public void playAnimation(String imgURL, int frames, int duration){
-        //TODO ADD A METHOD TO PLAY ANIMATION FOR IMAGE VIEW OBJ
-
+    public void playAnimation(String imgURL, int frames, int duration, ImageView animatingObj){
+        //play a single cycle of animation on a given obj
+        for (int i =0; i<= frames; i++){
+            Image img;
+            if (i < 10){
+                img = new Image(getClass().getResourceAsStream(imgURL + "frame000" + i + ".png"));
+            }
+            else {
+                img = new Image(getClass().getResourceAsStream(imgURL + "frame00" + i + ".png"));
+            }
+            KeyFrame keyFrame = new KeyFrame(
+                    Duration.seconds(i * duration),
+                    e -> animatingObj.setImage(img));
+            timeline.getKeyFrames().add(keyFrame);
+            }
+        timeline.setCycleCount(1);
+        timeline.play();
 
     }
 
