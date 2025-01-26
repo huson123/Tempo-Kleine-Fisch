@@ -12,18 +12,22 @@ import backend.Gameplay;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class Main extends Application implements SceneController {
     private diceSceneController diceSC;
     private gameSceneController gameSC;
-    private  Gameplay gameplay = new Gameplay();
+    private Gameplay gameplay = new Gameplay();
+    private Controller appController;
 
+    @Override
+    public void setAppController(Controller appController) {
+        this.appController = appController;
+    }
     @Override
     public void start(Stage primaryStage) throws IOException {
         // Initialize the Controller with the primary stage
-        Controller appController = new Controller(primaryStage);
+        appController = new Controller(primaryStage);
         // Initialize scenes and load the first one
         appController.initApp();
-        Gameplay gameplay = new Gameplay();
         gameplay.init();
         //get instances of controllers
         diceSC = (diceSceneController) appController.getSceneController("dice");
@@ -53,6 +57,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch(); // Launch the JavaFX application
+        launch();
     }
 }

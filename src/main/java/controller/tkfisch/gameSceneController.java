@@ -2,26 +2,21 @@ package controller.tkfisch;
 
 import backend.Entity;
 import backend.Gameplay;
-import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class gameSceneController implements SceneController {
     private Controller appController;
     private final String diceIdleUrl = "/animation/dice/diceIdle/";
     private final Gameplay gameplay = new Gameplay();
     private final List<Entity> entities = gameplay.getEntities();
+    private Timeline tl = new Timeline();
 
     //create timeline to play idle animation for entities
     @FXML
@@ -47,10 +42,9 @@ public class gameSceneController implements SceneController {
     @FXML
     private ImageView dice;
 
-    diceSceneController diceSC = new diceSceneController();
-
     public gameSceneController() throws IOException {
     }
+
 
     @Override
     public void setAppController(Controller appController) {
@@ -67,7 +61,7 @@ public class gameSceneController implements SceneController {
 
     public void move (String color) throws IOException {
         // TODO MIGHT NEED TO REMOVE X AND Y POS IN ENTITY AS REDUNDANCY
-        Timeline tl = new Timeline();
+
         for (Entity entity : entities)
         {
             if (entity.getColors().contains(color))

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="360.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.tkfisch.gameSceneController">
+   <children>
+      <Label layoutX="67.0" layoutY="47.0" text="GAMING IN PROGRESS" textFill="#0400ff">
+         <font>
+            <Font name="Book Antiqua Bold" size="40.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="dice" fitHeight="143.0" fitWidth="124.0" layoutX="509.0" layoutY="223.0" onMouseEntered="#diceEntered" onMouseExited="#diceExited" onMousePressed="#dicePressed" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/dice.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ship" fitHeight="57.0" fitWidth="64.0" layoutX="80.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/shipReleased.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="blueFish" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/blueFishReleased.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="orangeFish" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/orangeFishReleased.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="pinkFish" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/pinkFishReleased.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="yellowFish" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/yellowFishReleased.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
