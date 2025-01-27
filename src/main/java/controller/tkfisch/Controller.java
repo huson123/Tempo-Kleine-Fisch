@@ -140,6 +140,7 @@ public class Controller {
     public SceneController getSceneController(String name) {
         return sceneControllers.get(name);
     }
+    public Scene getScene (String name) {return scenes.get(name);}
 
     public Gameplay getGameplay() {
         return gameplay;

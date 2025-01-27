@@ -17,6 +17,7 @@ public class Main extends Application implements SceneController {
     private gameSceneController gameSC;
     private Gameplay gameplay = new Gameplay();
     private Controller appController;
+    private Stage stage = new Stage();
 
     @Override
     public void setAppController(Controller appController) {
@@ -25,7 +26,7 @@ public class Main extends Application implements SceneController {
     @Override
     public void start(Stage primaryStage) throws IOException {
         // Initialize the Controller with the primary stage
-        appController = new Controller(primaryStage);
+        appController = new Controller(stage);
         // Initialize scenes and load the first one
         appController.initApp();
         gameplay.init();
@@ -40,15 +41,18 @@ public class Main extends Application implements SceneController {
             @Override
             public void handle(long l) {
                 if (!gameplay.isGameOver()){
-                    String resultColor = diceSC.getResultColor();
-                    if (resultColor != null){
-                        try {
-                            gameSC.move(resultColor);
-                            diceSC.setResultColor(null);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                    if(stage.getScene() == appController.getScene("game")){
+                        String resultColor = diceSC.getResultColor();
+                        if (resultColor != null){
+                            try {
+                                gameSC.move(resultColor);
+                                diceSC.setResultColor(null);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
+
                 }
 
             }
