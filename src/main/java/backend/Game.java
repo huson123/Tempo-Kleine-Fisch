@@ -8,7 +8,6 @@ public class Game {
         while (!game.isGameOver())
         {
             game.roll();
-            game.update(); 
         }
 
         game.printResult(); 

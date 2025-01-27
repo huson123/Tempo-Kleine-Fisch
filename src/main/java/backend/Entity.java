@@ -4,7 +4,7 @@ import java.util.*;
 
 public abstract class Entity {
     public enum Type {
-        fish, SHIP
+        FISH, SHIP
     }
     private Type type;
     private int position; 
@@ -46,19 +46,12 @@ public abstract class Entity {
     }
 
     public int getxPos(){return xPos;}
-    
+
     // Method
     public void move()
     {
         this.position++;
         this.xPos += 32;
-    }
-}
-
-class Fish extends Entity {
-    public Fish(int xPos, int yPos, String name, String color)
-    {
-        super(Type.fish, 0, xPos, yPos,  name, Arrays.asList(color));
     }
 }
 

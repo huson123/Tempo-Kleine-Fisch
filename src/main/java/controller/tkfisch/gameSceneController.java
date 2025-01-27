@@ -1,30 +1,37 @@
 package controller.tkfisch;
 
 import backend.Entity;
+import backend.Fish;
 import backend.Gameplay;
+import controller.tkfisch.main.Main;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class gameSceneController implements SceneController {
     private Controller appController;
-    private final Gameplay gameplay = new Gameplay();
-    private final List<Entity> entities = gameplay.getEntities();
+    private Gameplay gameplay;
+    private List<Entity> entities;
+    //timeline for action
     private Timeline timeline = new Timeline();
+    //timeline for idle
     private final Map<ImageView, Timeline> idleTimelines = new HashMap<>();
+    private String fishSelectedColor;
 
-    //create timeline to play idle animation for entities
+    @FXML
+    AnchorPane pane;
+
     @FXML
     private ImageView ship;
     private final String shipMoveURL = "/animation/ship/move/";
     private final String shipStillURL = "/animation/ship/idle/";
+    private final String shipCatchURL = "/animation/ship/catch/";
 
     @FXML
     private ImageView blueFish;
@@ -59,7 +66,11 @@ public class gameSceneController implements SceneController {
     public void setAppController(Controller appController) {
         this.appController = appController;
     }
-    public void initial() throws IOException {
+    public void init() throws IOException {
+        gameplay = appController.getGameplay();
+        entities= gameplay.getEntities();
+
+
         //TODO add background animation
         Timeline temp = fishIdle(blueFishStillURL,blueFish);
         idleTimelines.put(blueFish,temp);
@@ -82,9 +93,80 @@ public class gameSceneController implements SceneController {
         temp.play();
     }
 
-
+    //MISC
     public void move (String color) throws IOException {
         // TODO MIGHT NEED TO REMOVE X AND Y POS IN ENTITY AS REDUNDANCY
+        //MAIN LOGIC BLOCK
+        //flag to determine if the color has been caught
+        boolean fishCaught = false;
+        List<String> caughtFish = gameplay.getCaughtFish();
+        List <String> escapedFish = gameplay.getEscapedFish();
+        ImageView actionEntity = null;
+        String moveURL = null;
+        String stillURL = null;
+
+        //System.out.println(escapedFish);
+        //System.out.println(caughtFish);
+        //System.out.println(gameplay.getPlayerType());
+
+        //DETERMINE COLOR TO MOVE IN FRONT END
+        //AND LOGIC REGARDING FISH CAUGHT AND ESCAPED
+            if (escapedFish.contains(color) && (gameplay.getPlayerType().equals("Fish"))){
+                System.out.println("fish when fish escaped");
+                fishSelectSceneController fishSSC = (fishSelectSceneController) appController.getSceneController("fishSelect");
+                fishSSC.init();
+                appController.switchToScene("fishSelect");
+                return;
+            }
+            else if (escapedFish.contains(color) && (gameplay.getPlayerType().equals("Ship"))){
+                System.out.println("ship when fish escaped");
+                do {
+                    fishSelectedColor = gameplay.roll();
+                } while (gameplay.getEscapedFish().contains(fishSelectedColor));
+                color = fishSelectedColor;
+                fishSelectedColor = null;
+            }
+            System.out.println("keep running");
+            //System.out.println((((Fish) entity)).isCaught());
+            //System.out.println(entity.getColors().get(0));
+            if(caughtFish.contains(color)) {
+                // if fish has been caught boat move
+                System.out.println("fish caught");
+                fishCaught = true;
+                actionEntity = ship;
+                moveURL = shipMoveURL;
+                stillURL = shipStillURL;
+                color = "Red";
+            } else {
+                // if fish has not been caught, move acc to color
+                switch (color) {
+                    case "Blue":
+                        actionEntity = blueFish;
+                        moveURL = blueFishMoveURL;
+                        stillURL = blueFishStillURL;
+                        break;
+                    case "Pink":
+                        actionEntity = pinkFish;
+                        moveURL = pinkFishMoveURL;
+                        stillURL = pinkFishStillURL;
+                        break;
+                    case "Yellow":
+                        actionEntity = yellowFish;
+                        moveURL = yellowFishMoveURL;
+                        stillURL = yellowFishStillURL;
+                        break;
+                    case "Orange":
+                        actionEntity = orangeFish;
+                        moveURL = orangeFishMoveURL;
+                        stillURL = orangeFishStillURL;
+                        break;
+                    case "Red", "Green":
+                        actionEntity = ship;
+                        moveURL = shipMoveURL;
+                        stillURL = shipStillURL;
+                        break;
+                }
+            }
 
         for (Entity entity : entities) {
             if (entity.getColors().contains(color)) {
@@ -92,82 +174,126 @@ public class gameSceneController implements SceneController {
                 System.out.println(entity.getPosition());
                 System.out.println(entity.getxPos());
 
-                ImageView actEntity = null;
-                String moveURL = null;
-                String stillURL = null;
 
-                // Determine which fish to move based on color
-                switch (color) {
-                    case "Blue":
-                        actEntity = blueFish;
-                        moveURL = blueFishMoveURL;
-                        stillURL = blueFishStillURL;
-                        break;
-                    case "Pink":
-                        actEntity = pinkFish;
-                        moveURL = pinkFishMoveURL;
-                        stillURL = pinkFishStillURL;
-                        break;
-                    case "Yellow":
-                        actEntity = yellowFish;
-                        moveURL = yellowFishMoveURL;
-                        stillURL = yellowFishStillURL;
-                        break;
-                    case "Orange":
-                        actEntity = orangeFish;
-                        moveURL = orangeFishMoveURL;
-                        stillURL = orangeFishStillURL;
-                        break;
-                    case "Red", "Green":
-                        actEntity = ship;
-                        moveURL = shipMoveURL;
-                        stillURL = shipStillURL;
-                        break;
-                }
-
-                if (actEntity != null) {
+                if (actionEntity != null) {
+                    String tempStillURL = stillURL;
+                    ImageView tempEntity = actionEntity;
                     // Stop and clear the idle animation if it exists
-                    Timeline idleTimeline = idleTimelines.get(actEntity);
+                    Timeline idleTimeline = idleTimelines.get(actionEntity);
                     if (idleTimeline != null) {
                         idleTimeline.stop();
-                        idleTimelines.remove(actEntity);
+                        idleTimelines.remove(actionEntity);
                     }
-                    moveImageView(18, actEntity);
-                    // Play the movement animation
                     timeline.getKeyFrames().clear();
-                    if (entity.getType() == Entity.Type.fish){
-                        timeline = fishMove(moveURL, actEntity);
+
+
+                    // Play the movement animation
+
+                    if (entity.getType() == Entity.Type.FISH && !fishCaught) {
+                        moveImageView(18, tempEntity);
+                        timeline = fishMove(moveURL, actionEntity);
+                        timeline.play();
+                        ImageView finalActionEntity = actionEntity;
+                        timeline.setOnFinished(e -> {
+                            moveImageView(14, tempEntity);
+                            try {
+                                // Start the idle animation again after moving
+                                Timeline newIdleTimeline = fishIdle(tempStillURL, tempEntity);
+                                idleTimelines.put(tempEntity, newIdleTimeline);
+                                newIdleTimeline.play();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            if (gameplay.fishEndUpdate(entity)) {
+                                gameplay.fishEndUpdate(entity);
+                                removeImageView(finalActionEntity);
+                                gameplay.addEscapedFish(entity.getColors().get(0));
+                            }
+                        });
+                    } else if (entity.getType() == Entity.Type.SHIP || fishCaught) {
+                        System.out.println("ship called");
+                        //play ship move, if detect collision then play catch
+                        //move
+                        timeline = shipMove(moveURL, actionEntity);
+                        moveImageView(18, tempEntity);
+                        timeline.play();
+                        timeline.setOnFinished(e -> {
+                            moveImageView(14, tempEntity);
+                            List<Entity> temp = gameplay.collisionUpdate(entity);
+                            System.out.println(temp);
+                            if (!temp.isEmpty()) {
+                                try {
+                                    //catch
+                                    timeline = shipCatch(shipCatchURL, ship);
+                                } catch (IOException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                                timeline.play();
+                                timeline.setOnFinished(event -> {
+                                    try {
+                                        //idle
+                                        // Start the idle animation again after moving
+                                        Timeline newIdleTimeline = shipIdle(tempStillURL, tempEntity);
+                                        idleTimelines.put(tempEntity, newIdleTimeline);
+                                        newIdleTimeline.play();
+                                    } catch (IOException ex) {
+                                        throw new RuntimeException(ex);
+                                    }
+                                    for (Entity fish : temp) {
+                                        gameplay.addCaughtFish(fish.getColors().get(0));
+                                        removeImageView(convertToImageView(fish));
+                                    }
+                                });
+                            } else {
+                                try {
+                                    //idle
+                                    // Start the idle animation again after moving
+                                    Timeline newIdleTimeline = shipIdle(tempStillURL, tempEntity);
+                                    idleTimelines.put(tempEntity, newIdleTimeline);
+                                    newIdleTimeline.play();
+                                } catch (IOException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        });
+                        fishCaught = false;
                     }
-                    else {
-                        timeline = shipMove(moveURL,actEntity);
-                    }
-                    timeline.play();
-                    String tempStillURL = stillURL;
-                    ImageView tempEntity = actEntity;
-                    timeline.setOnFinished(e -> {
-                        moveImageView(14, tempEntity);
-                        try {
-                            // Start the idle animation again after moving
-                            Timeline newIdleTimeline = fishIdle(tempStillURL, tempEntity);
-                            idleTimelines.put(tempEntity, newIdleTimeline);
-                            newIdleTimeline.play();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    });
+
+
                 }
-                break;
+
             }
         }
     }
-    //MISC
+
     public void moveImageView (int amount, ImageView obj){
         //move image view obj on x axis
         obj.setX(obj.getX() + amount);
     }
+    public void removeImageView(ImageView obj){
+            pane.getChildren().remove(obj);
+    }
+    public ImageView convertToImageView(Entity fish){
+            switch (fish.getName()){
+                case "blueFish":
+                    return blueFish;
+                case "pinkFish":
+                    return pinkFish;
+                case "yellowFish":
+                    return yellowFish;
+                case "orangeFish":
+                    return orangeFish;
+
+            }
+        return null;
+    }
+    public void setFishSelectedColor(String color){
+        fishSelectedColor = color;
+    }
+
     //FISH SECTION
     public Timeline fishMove (String moveURL, ImageView fish) throws IOException {
-        return appController.playAnimation(moveURL,21,0.2,fish);
+        return appController.playAnimation(moveURL,21,0.1,fish);
     }
     public Timeline fishIdle (String idleURL, ImageView fish) throws IOException {
         return appController.playIdleAnimation(idleURL,12,0.2,fish);
@@ -178,7 +304,7 @@ public class gameSceneController implements SceneController {
         return appController.playAnimation(moveURL,6,0.2,ship);
     }
     public Timeline shipCatch (String catchURL, ImageView ship) throws IOException {
-        return appController.playAnimation(catchURL,12,0.2,ship);
+        return appController.playAnimation(catchURL,11,0.2,ship);
     }
     public Timeline shipIdle (String idleURL,ImageView ship) throws IOException {
         return appController.playIdleAnimation(idleURL,12,0.2,ship);

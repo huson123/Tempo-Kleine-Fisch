@@ -35,6 +35,7 @@ public class Controller {
             addScene("select", "/scene/selectScene.fxml");
             addScene("game", "/scene/gameScene.fxml");
             addScene("dice", "/scene/diceScene.fxml");
+            addScene("fishSelect", "/scene/fishSelectScene.fxml");
 
             // Switch to the initial scene
             switchToScene("start");

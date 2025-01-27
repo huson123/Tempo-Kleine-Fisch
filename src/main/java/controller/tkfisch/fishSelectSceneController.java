@@ -1,15 +1,26 @@
 package controller.tkfisch;
 
+import backend.Gameplay;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
+import java.util.List;
 
 public class fishSelectSceneController implements SceneController {
     private Controller appController;
+    private gameSceneController gameSC;
+    private Gameplay gameplay;
 
     @FXML
-    private ImageView blueFishImage, pinkFishImage, yellowFishImage, orangeFishImage;
+    private AnchorPane pane;
+
+    @FXML
+    private ImageView blueFish, pinkFish, yellowFish, orangeFish;
 
     private final Image blueFishPressed = new Image(getClass().getResourceAsStream("/image/blueFishPressed.jpg"));
     private final Image blueFishReleased = new Image(getClass().getResourceAsStream("/image/blueFishReleased.png"));
@@ -35,56 +46,103 @@ public class fishSelectSceneController implements SceneController {
             e.printStackTrace();
         }
     }
+    public void init(){
+        System.out.println("init");
+       gameSC = (gameSceneController) appController.getSceneController("game");
+       gameplay = appController.getGameplay();
+       nonColor();
+    }
 
-    public void blueFishPressed(MouseEvent event) {
-        blueFishImage.setImage(blueFishPressed);
-        switchToGame(event);
+    public void nonColor(){
+        // remove the color which has been caught or escaped
+        List<String> caughtFish = gameplay.getCaughtFish();
+        List<String> escapedFish = gameplay.getEscapedFish();
+        for(String fish : caughtFish){
+            removeImageView(convertStrToImageView(fish));
+        }
+        for(String fish : escapedFish){
+            removeImageView(convertStrToImageView(fish));
+        }
+
+    }
+    public void removeImageView(ImageView obj){
+        System.out.println("Removed ImageView: " + obj);
+        pane.getChildren().remove(obj);
+    }
+    public ImageView convertStrToImageView(String color){
+        switch (color){
+            case "Blue":
+                return blueFish;
+            case "Orange":
+                return orangeFish;
+            case "Pink":
+                return pinkFish;
+            case "Yellow":
+                return yellowFish;
+        }
+        return null;
+    }
+
+    public void blueFishPressed(MouseEvent event) throws IOException {
+        blueFish.setImage(blueFishPressed);
+        //gameSC.setFishSelectedColor("Blue");
+        gameSC.move("Blue");
+        appController.switchToScene("game");
     }
 
     public void blueFishEntered() {
-        blueFishImage.setImage(blueFishPressed);
+        blueFish.setImage(blueFishPressed);
     }
 
     public void blueFishExited() {
-        blueFishImage.setImage(blueFishReleased);
+        blueFish.setImage(blueFishReleased);
     }
 
-    public void pinkFishPressed(MouseEvent event) {
-        pinkFishImage.setImage(pinkFishPressed);
-        switchToGame(event);
+    public void pinkFishPressed(MouseEvent event) throws IOException {
+        pinkFish.setImage(pinkFishPressed);
+        //gameSC.setFishSelectedColor("Pink");
+        gameSC.move("Pink");
+        appController.switchToScene("game");
+
     }
 
     public void pinkFishEntered() {
-        pinkFishImage.setImage(pinkFishPressed);
+        pinkFish.setImage(pinkFishPressed);
     }
 
     public void pinkFishExited() {
-        pinkFishImage.setImage(pinkFishReleased);
+        pinkFish.setImage(pinkFishReleased);
     }
 
-    public void orangeFishPressed(MouseEvent event) {
-        orangeFishImage.setImage(orangeFishPressed);
-        switchToGame(event);
+    public void orangeFishPressed(MouseEvent event) throws IOException {
+        orangeFish.setImage(orangeFishPressed);
+        //gameSC.setFishSelectedColor("Orange");
+        gameSC.move("Orange");
+        appController.switchToScene("game");
+
     }
 
     public void orangeFishEntered() {
-        orangeFishImage.setImage(orangeFishPressed);
+        orangeFish.setImage(orangeFishPressed);
     }
 
     public void orangeFishExited() {
-        orangeFishImage.setImage(orangeFishReleased);
+        orangeFish.setImage(orangeFishReleased);
     }
 
-    public void yellowFishPressed(MouseEvent event) {
-        yellowFishImage.setImage(yellowFishPressed);
-        switchToGame(event);
+    public void yellowFishPressed(MouseEvent event) throws IOException {
+        yellowFish.setImage(yellowFishPressed);
+        //gameSC.setFishSelectedColor("Yellow");
+        gameSC.move("Yellow");
+        appController.switchToScene("game");
+
     }
 
     public void yellowFishEntered() {
-        yellowFishImage.setImage(yellowFishPressed);
+        yellowFish.setImage(yellowFishPressed);
     }
 
     public void yellowFishExited() {
-        yellowFishImage.setImage(yellowFishReleased);
+        yellowFish.setImage(yellowFishReleased);
     }
 }

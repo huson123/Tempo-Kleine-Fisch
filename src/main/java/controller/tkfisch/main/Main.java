@@ -1,9 +1,6 @@
 package controller.tkfisch.main;
 
-import controller.tkfisch.Controller;
-import controller.tkfisch.SceneController;
-import controller.tkfisch.diceSceneController;
-import controller.tkfisch.gameSceneController;
+import controller.tkfisch.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,11 +10,17 @@ import backend.Gameplay;
 import java.io.IOException;
 
 public class Main extends Application implements SceneController {
+    //import controllers
     private diceSceneController diceSC;
     private gameSceneController gameSC;
-    private Gameplay gameplay = new Gameplay();
+    private fishSelectSceneController fishSSC;
+    private selectSceneController sceneSC;
+    private startSceneController startSC;
+
+    private Gameplay gameplay = new Gameplay() ;
     private Controller appController;
     private Stage stage = new Stage();
+    private AnimationTimer gameloop;
 
     @Override
     public void setAppController(Controller appController) {
@@ -30,15 +33,20 @@ public class Main extends Application implements SceneController {
         // Initialize scenes and load the first one
         appController.initApp();
         gameplay.init();
+
         //get instances of controllers
         diceSC = (diceSceneController) appController.getSceneController("dice");
         gameSC = (gameSceneController) appController.getSceneController("game");
-        gameSC.initial();
+        fishSSC = (fishSelectSceneController) appController.getSceneController("fishSelect");
+
+        //scenes init
+        gameSC.init();
+        fishSSC.init();
         startGameLoop();
     }
     public void startGameLoop () throws IOException {
         //game loop and updating logic
-        AnimationTimer gameloop = new AnimationTimer() {
+        gameloop = new AnimationTimer() {
             @Override
             public void handle(long l) {
                 if (!gameplay.isGameOver()){
@@ -55,7 +63,7 @@ public class Main extends Application implements SceneController {
                     }
 
                 }
-
+                gameplay.endGameUpdate();
             }
         };
         gameloop.start();

@@ -16,13 +16,17 @@ public class selectSceneController implements SceneController {
     }
 
     public void fishPressed(MouseEvent event) {
-        appController.switchToScene("fishSelect");
         Gameplay gameplay = appController.getGameplay();
         gameplay.setPlayerType("Fish"); // Update backend logic
+        appController.switchToScene("game");
+
     }
 
     public void shipPressed(MouseEvent event) {
+        Gameplay gameplay = appController.getGameplay();
+        gameplay.setPlayerType("Ship");
         appController.switchToScene("game");
+
     }
 
     // Event handlers for mouse hover and exit (ship)
@@ -36,14 +40,14 @@ public class selectSceneController implements SceneController {
         // Add hover effect logic here, e.g., resetting opacity
     }
 
-    // Event handlers for mouse hover and exit (fish)
+    // Event handlers for mouse hover and exit (FISH)
     public void fishEntered(MouseEvent event) {
-        System.out.println("Mouse entered the fish image.");
+        System.out.println("Mouse entered the FISH image.");
         // Add hover effect logic here, e.g., changing opacity
     }
 
     public void fishExited(MouseEvent event) {
-        System.out.println("Mouse exited the fish image.");
+        System.out.println("Mouse exited the FISH image.");
         // Add hover effect logic here, e.g., resetting opacity
     }
 }
