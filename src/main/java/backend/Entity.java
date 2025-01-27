@@ -6,8 +6,7 @@ public abstract class Entity {
     public enum Type {
         fish, SHIP
     }
-    private Type type; 
-
+    private Type type;
     private int position; 
     private String name; 
     protected List<String> colors;

@@ -15,14 +15,17 @@ import java.util.Map;
 
 public class gameSceneController implements SceneController {
     private Controller appController;
-    private final String diceIdleUrl = "/animation/dice/diceIdle/";
     private final Gameplay gameplay = new Gameplay();
     private final List<Entity> entities = gameplay.getEntities();
     private Timeline timeline = new Timeline();
+    private final Map<ImageView, Timeline> idleTimelines = new HashMap<>();
 
     //create timeline to play idle animation for entities
     @FXML
     private ImageView ship;
+    private final String shipMoveURL = "/animation/ship/move/";
+    private final String shipStillURL = "/animation/ship/idle/";
+
     @FXML
     private ImageView blueFish;
     private final String blueFishMoveURL = "/animation/fish/move/blueFishMove/";
@@ -45,7 +48,8 @@ public class gameSceneController implements SceneController {
 
     @FXML
     private ImageView dice;
-    private final Map<ImageView, Timeline> idleTimelines = new HashMap<>();
+    private final String diceIdleUrl = "/animation/dice/diceIdle/";
+
 
     public gameSceneController() throws IOException {
     }
@@ -55,8 +59,27 @@ public class gameSceneController implements SceneController {
     public void setAppController(Controller appController) {
         this.appController = appController;
     }
-    public void initialize() throws IOException {
+    public void initial() throws IOException {
         //TODO add background animation
+        Timeline temp = fishIdle(blueFishStillURL,blueFish);
+        idleTimelines.put(blueFish,temp);
+        temp.play();
+
+        temp = fishIdle(blueFishStillURL,pinkFish);
+        idleTimelines.put(pinkFish,temp);
+        temp.play();
+
+        temp = fishIdle(blueFishStillURL,orangeFish);
+        idleTimelines.put(orangeFish,temp);
+        temp.play();
+
+        temp = fishIdle(blueFishStillURL,yellowFish);
+        idleTimelines.put(yellowFish,temp);
+        temp.play();
+
+        temp = shipIdle(shipStillURL,ship);
+        idleTimelines.put(ship,temp);
+        temp.play();
     }
 
 
@@ -95,6 +118,11 @@ public class gameSceneController implements SceneController {
                         moveURL = orangeFishMoveURL;
                         stillURL = orangeFishStillURL;
                         break;
+                    case "Red", "Green":
+                        actEntity = ship;
+                        moveURL = shipMoveURL;
+                        stillURL = shipStillURL;
+                        break;
                 }
 
                 if (actEntity != null) {
@@ -107,16 +135,21 @@ public class gameSceneController implements SceneController {
                     moveImageView(18, actEntity);
                     // Play the movement animation
                     timeline.getKeyFrames().clear();
-                    timeline = fishMove(moveURL, actEntity);
+                    if (entity.getType() == Entity.Type.fish){
+                        timeline = fishMove(moveURL, actEntity);
+                    }
+                    else {
+                        timeline = shipMove(moveURL,actEntity);
+                    }
                     timeline.play();
                     String tempStillURL = stillURL;
-                    ImageView tempFish = actEntity;
+                    ImageView tempEntity = actEntity;
                     timeline.setOnFinished(e -> {
-                        moveImageView(14, tempFish);
+                        moveImageView(14, tempEntity);
                         try {
                             // Start the idle animation again after moving
-                            Timeline newIdleTimeline = fishIdle(tempStillURL, tempFish);
-                            idleTimelines.put(tempFish, newIdleTimeline);
+                            Timeline newIdleTimeline = fishIdle(tempStillURL, tempEntity);
+                            idleTimelines.put(tempEntity, newIdleTimeline);
                             newIdleTimeline.play();
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
@@ -142,10 +175,13 @@ public class gameSceneController implements SceneController {
 
     //SHIP SECTION
     public Timeline shipMove (String moveURL,ImageView ship) throws IOException {
-        return appController.playAnimation(moveURL,7,0.2,ship);
+        return appController.playAnimation(moveURL,6,0.2,ship);
     }
     public Timeline shipCatch (String catchURL, ImageView ship) throws IOException {
         return appController.playAnimation(catchURL,12,0.2,ship);
+    }
+    public Timeline shipIdle (String idleURL,ImageView ship) throws IOException {
+        return appController.playIdleAnimation(idleURL,12,0.2,ship);
     }
 
     //DICE SECTION

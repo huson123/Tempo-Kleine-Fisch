@@ -33,6 +33,7 @@ public class Main extends Application implements SceneController {
         //get instances of controllers
         diceSC = (diceSceneController) appController.getSceneController("dice");
         gameSC = (gameSceneController) appController.getSceneController("game");
+        gameSC.initial();
         startGameLoop();
     }
     public void startGameLoop () throws IOException {
