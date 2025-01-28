@@ -1,11 +1,11 @@
 package controller.tkfisch;
 
+import java.io.IOException;
+
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
-
-import java.io.IOException;
 
 public class startSceneController implements SceneController {
    private Controller appController;
@@ -23,7 +23,7 @@ public class startSceneController implements SceneController {
       Timeline tl = new Timeline();
       tl = appController.setBackgroundAnimation(bg, 12, 0.2, pane);
       tl.play();
-      pane.setOpacity(0.5);
+      pane.setOpacity(1);
    }
    public void switchToSelect(ActionEvent event) {
       appController.switchToScene("select");

@@ -1,9 +1,12 @@
 package controller.tkfisch;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import backend.Entity;
-import backend.Fish;
 import backend.Gameplay;
-import controller.tkfisch.main.Main;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -12,11 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.io.IOException;
-import java.util.*;
 
 public class gameSceneController implements SceneController {
     private Controller appController;
@@ -241,9 +240,9 @@ public class gameSceneController implements SceneController {
                         timeline.setOnFinished(e -> {
                             moveImageView(36, tempEntity);
                             //re adjust for smol animation
-                            ship.setFitHeight(124);
-                            ship.setFitWidth(105);
-                            ship.setY(ship.getY() + 20);
+                            ship.setFitHeight(100);
+                            ship.setFitWidth(85);
+                            ship.setY(ship.getY() + 32);
 
                             List<Entity> temp = gameplay.collisionUpdate(entity);
                             displayScore(shipScore);
@@ -347,7 +346,7 @@ public class gameSceneController implements SceneController {
         //adjust for small animation
         ship.setFitHeight(150);
         ship.setFitWidth(150);
-        ship.setY(ship.getY() - 20);
+        ship.setY(ship.getY() - 32);
         return appController.playAnimation(moveURL,6,0.2,ship);
     }
     public Timeline shipCatch (String catchURL, ImageView ship) throws IOException {
