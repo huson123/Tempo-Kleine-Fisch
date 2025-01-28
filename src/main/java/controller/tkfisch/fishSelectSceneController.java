@@ -39,7 +39,7 @@ public class fishSelectSceneController implements SceneController {
         this.appController = appController;
     }
 
-    public void switchToGame(MouseEvent event) {
+    public void switchToGame() {
         try {
             appController.switchToScene("game");
         } catch (Exception e) {
@@ -47,14 +47,16 @@ public class fishSelectSceneController implements SceneController {
         }
     }
     public void init(){
-        System.out.println("init");
        gameSC = (gameSceneController) appController.getSceneController("game");
        gameplay = appController.getGameplay();
+       System.out.println(gameplay);
+       System.out.println(gameSC);
+       System.out.println(blueFish.getScene() == appController.getScene("fishSelect"));
        nonColor();
     }
 
     public void nonColor(){
-        // remove the color which has been caught or escaped
+        // remove the colors which has been caught or escaped
         List<String> caughtFish = gameplay.getCaughtFish();
         List<String> escapedFish = gameplay.getEscapedFish();
         for(String fish : caughtFish){
@@ -83,11 +85,11 @@ public class fishSelectSceneController implements SceneController {
         return null;
     }
 
-    public void blueFishPressed(MouseEvent event) throws IOException {
+    public void blueFishPressed() throws IOException {
         blueFish.setImage(blueFishPressed);
         //gameSC.setFishSelectedColor("Blue");
         gameSC.move("Blue");
-        appController.switchToScene("game");
+        switchToGame();
     }
 
     public void blueFishEntered() {
@@ -98,11 +100,11 @@ public class fishSelectSceneController implements SceneController {
         blueFish.setImage(blueFishReleased);
     }
 
-    public void pinkFishPressed(MouseEvent event) throws IOException {
+    public void pinkFishPressed() throws IOException {
         pinkFish.setImage(pinkFishPressed);
         //gameSC.setFishSelectedColor("Pink");
         gameSC.move("Pink");
-        appController.switchToScene("game");
+        switchToGame();
 
     }
 
@@ -114,11 +116,11 @@ public class fishSelectSceneController implements SceneController {
         pinkFish.setImage(pinkFishReleased);
     }
 
-    public void orangeFishPressed(MouseEvent event) throws IOException {
+    public void orangeFishPressed() throws IOException {
         orangeFish.setImage(orangeFishPressed);
         //gameSC.setFishSelectedColor("Orange");
         gameSC.move("Orange");
-        appController.switchToScene("game");
+        switchToGame();
 
     }
 
@@ -130,11 +132,11 @@ public class fishSelectSceneController implements SceneController {
         orangeFish.setImage(orangeFishReleased);
     }
 
-    public void yellowFishPressed(MouseEvent event) throws IOException {
+    public void yellowFishPressed() throws IOException {
         yellowFish.setImage(yellowFishPressed);
         //gameSC.setFishSelectedColor("Yellow");
         gameSC.move("Yellow");
-        appController.switchToScene("game");
+        switchToGame();
 
     }
 

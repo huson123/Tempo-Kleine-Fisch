@@ -61,9 +61,8 @@ public class Main extends Application implements SceneController {
                             }
                         }
                     }
-
+                    gameplay.endGameUpdate();
                 }
-                gameplay.endGameUpdate();
             }
         };
         gameloop.start();

@@ -44,6 +44,7 @@ public class diceSceneController implements SceneController {
         if (buttonFlag){
             buttonFlag = false;
             button.setText("Roll");
+            System.out.println("switching to game");
             switchToGame();
             return;
         }

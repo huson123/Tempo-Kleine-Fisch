@@ -19,6 +19,7 @@ public class selectSceneController implements SceneController {
         Gameplay gameplay = appController.getGameplay();
         gameplay.setPlayerType("Fish"); // Update backend logic
         appController.switchToScene("game");
+        //System.out.println("gaming");
 
     }
 

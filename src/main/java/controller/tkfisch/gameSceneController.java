@@ -4,12 +4,15 @@ import backend.Entity;
 import backend.Fish;
 import backend.Gameplay;
 import controller.tkfisch.main.Main;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.*;
@@ -23,6 +26,7 @@ public class gameSceneController implements SceneController {
     //timeline for idle
     private final Map<ImageView, Timeline> idleTimelines = new HashMap<>();
     private String fishSelectedColor;
+    private Stage stage;
 
     @FXML
     AnchorPane pane;
@@ -68,7 +72,8 @@ public class gameSceneController implements SceneController {
     }
     public void init() throws IOException {
         gameplay = appController.getGameplay();
-        entities= gameplay.getEntities();
+        entities = gameplay.getEntities();
+        stage = appController.getPrimaryStage();
 
 
         //TODO add background animation
@@ -111,11 +116,19 @@ public class gameSceneController implements SceneController {
 
         //DETERMINE COLOR TO MOVE IN FRONT END
         //AND LOGIC REGARDING FISH CAUGHT AND ESCAPED
-            if (escapedFish.contains(color) && (gameplay.getPlayerType().equals("Fish"))){
+            if (escapedFish.contains(color)
+                    && (gameplay.getPlayerType().equals("Fish")
+            )){
+                System.out.println(stage.getScene());
                 System.out.println("fish when fish escaped");
-                fishSelectSceneController fishSSC = (fishSelectSceneController) appController.getSceneController("fishSelect");
-                fishSSC.init();
-                appController.switchToScene("fishSelect");
+                System.out.println("Fish escaped while being Fish");
+                    // Add a delay of 1 second before switching scenes
+                    addDelay(0.1, () -> {
+                        fishSelectSceneController fishSSC =
+                                (fishSelectSceneController) appController.getSceneController("fishSelect");
+                        appController.switchToScene("fishSelect");
+                        fishSSC.init();
+                    });
                 return;
             }
             else if (escapedFish.contains(color) && (gameplay.getPlayerType().equals("Ship"))){
@@ -289,6 +302,11 @@ public class gameSceneController implements SceneController {
     }
     public void setFishSelectedColor(String color){
         fishSelectedColor = color;
+    }
+    private void addDelay(double seconds, Runnable onComplete) {
+        PauseTransition pause = new PauseTransition(Duration.seconds(seconds));
+        pause.setOnFinished(event -> onComplete.run());
+        pause.play();
     }
 
     //FISH SECTION
