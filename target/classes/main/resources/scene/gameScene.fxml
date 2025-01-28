@@ -8,9 +8,9 @@
 
 <AnchorPane fx:id="pane" prefHeight="360.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.tkfisch.gameSceneController">
    <children>
-      <Label layoutX="67.0" layoutY="47.0" text="GAMING IN PROGRESS" textFill="#0400ff">
+      <Label fx:id="fishScore" layoutX="519.0" layoutY="14.0" prefHeight="32.0" prefWidth="81.0" text="Fish:" textFill="RED">
          <font>
-            <Font name="Book Antiqua Bold" size="40.0" />
+            <Font name="Book Antiqua Bold" size="24.0" />
          </font>
       </Label>
       <ImageView fx:id="dice" fitHeight="143.0" fitWidth="124.0" layoutX="509.0" layoutY="223.0" onMouseEntered="#diceEntered" onMouseExited="#diceExited" onMousePressed="#dicePressed" pickOnBounds="true" preserveRatio="true">
@@ -43,5 +43,15 @@
             <Image url="@../image/yellowFishReleased.jpg" />
          </image>
       </ImageView>
+      <Label fx:id="shipScore" layoutX="519.0" layoutY="46.0" prefHeight="32.0" prefWidth="81.0" text="Ship:" textFill="RED">
+         <font>
+            <Font name="Book Antiqua Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="result" contentDisplay="CENTER" layoutX="-1.0" layoutY="98.0" prefHeight="136.0" prefWidth="640.0" textFill="RED">
+         <font>
+            <Font name="Book Antiqua Bold" size="96.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

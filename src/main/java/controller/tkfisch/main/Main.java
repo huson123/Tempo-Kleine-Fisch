@@ -17,7 +17,7 @@ public class Main extends Application implements SceneController {
     private selectSceneController sceneSC;
     private startSceneController startSC;
 
-    private Gameplay gameplay = new Gameplay() ;
+    private Gameplay gameplay;
     private Controller appController;
     private Stage stage = new Stage();
     private AnimationTimer gameloop;
@@ -32,6 +32,7 @@ public class Main extends Application implements SceneController {
         appController = new Controller(stage);
         // Initialize scenes and load the first one
         appController.initApp();
+        gameplay = appController.getGameplay();
         gameplay.init();
 
         //get instances of controllers
@@ -41,7 +42,9 @@ public class Main extends Application implements SceneController {
 
         //scenes init
         gameSC.init();
+        diceSC.init();
         fishSSC.init();
+
         startGameLoop();
     }
     public void startGameLoop () throws IOException {
@@ -54,6 +57,7 @@ public class Main extends Application implements SceneController {
                         String resultColor = diceSC.getResultColor();
                         if (resultColor != null){
                             try {
+                                System.out.println("move called with resultColor: " + resultColor);
                                 gameSC.move(resultColor);
                                 diceSC.setResultColor(null);
                             } catch (IOException e) {
@@ -62,6 +66,13 @@ public class Main extends Application implements SceneController {
                         }
                     }
                     gameplay.endGameUpdate();
+                    //System.out.println(gameplay.isGameOver());
+                    //System.out.println(gameplay.getEntities());
+                }
+                else {
+                    System.out.println("result");
+                    gameSC.displayResult(gameplay.printResult());
+                    gameloop.stop();
                 }
             }
         };

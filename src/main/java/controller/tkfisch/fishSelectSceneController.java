@@ -49,9 +49,9 @@ public class fishSelectSceneController implements SceneController {
     public void init(){
        gameSC = (gameSceneController) appController.getSceneController("game");
        gameplay = appController.getGameplay();
-       System.out.println(gameplay);
-       System.out.println(gameSC);
-       System.out.println(blueFish.getScene() == appController.getScene("fishSelect"));
+       //System.out.println(gameplay);
+       //System.out.println(gameSC);
+       //System.out.println(blueFish.getScene() == appController.getScene("fishSelect"));
        nonColor();
     }
 
@@ -68,7 +68,7 @@ public class fishSelectSceneController implements SceneController {
 
     }
     public void removeImageView(ImageView obj){
-        System.out.println("Removed ImageView: " + obj);
+        //System.out.println("Removed ImageView: " + obj);
         pane.getChildren().remove(obj);
     }
     public ImageView convertStrToImageView(String color){

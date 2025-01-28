@@ -29,7 +29,7 @@ public class Gameplay {
         this.shipScore = 0;
         this.fishScore = 0; 
 
-        init(); 
+        //init();
     }
 
     // Getter 
@@ -93,6 +93,7 @@ public class Gameplay {
     // Method 
     public void init()
     {
+        //System.out.println("gameplay init");
         entities.add(new Ship("ship", new ArrayList<>(Arrays.asList("Red", "Green"))));
         entities.add(new Fish(6,250,216,"blueFish", "Blue"));
         entities.add(new Fish(-4,250,230,"yellowFish", "Yellow"));
@@ -150,23 +151,29 @@ public class Gameplay {
     }
     public void endGameUpdate(){
         // End the game if no FISH are left
+        //System.out.println("endGameUpdate called");
         if (entities.stream().noneMatch(e -> e.getType() == Entity.Type.FISH)) {
             setGameOver();
+            System.out.println("working");
         }
     }
-    public void printResult()
+    public String printResult()
     {
-        if (getShipScore() > getFishScore())
-        {
-            System.out.println("Boat Wins!");
+        if (getPlayerType().equals("Ship")){
+            if (getShipScore() > getFishScore()){
+                return "You Win!";
+            } else if (getShipScore() < getFishScore()) {
+                return "You Lose!";
+            }
+            else return "Tie!";
         }
-        else if (getShipScore() < getFishScore())
-        {
-            System.out.println("Fish Wins!");
-        }
-        else
-        {
-            System.out.println("It's a Tie!");
+        else {
+            if (getShipScore() < getFishScore()){
+                return "You Win!";
+            } else if (getShipScore() > getFishScore()) {
+                return "You Lose!";
+            }
+            else return "Tie!";
         }
     }
 

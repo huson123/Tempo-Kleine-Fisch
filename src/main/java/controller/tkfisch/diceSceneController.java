@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class diceSceneController implements SceneController {
     private Controller appController;
-    private Gameplay gameplay = new Gameplay();
+    private Gameplay gameplay;
     private String diceResult = "/animation/dice/result/diceResult";
     private String resultColor;
     @FXML
@@ -27,8 +27,9 @@ public class diceSceneController implements SceneController {
     }
 
 
-    public void initialize () throws IOException {
+    public void init () throws IOException {
         //TODO ADD BACKGROUND ANIMATION
+        gameplay = appController.getGameplay();
     }
     public void switchToGame() {
         try {
@@ -44,7 +45,7 @@ public class diceSceneController implements SceneController {
         if (buttonFlag){
             buttonFlag = false;
             button.setText("Roll");
-            System.out.println("switching to game");
+            //System.out.println("switching to game");
             switchToGame();
             return;
         }

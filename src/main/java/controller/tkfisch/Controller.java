@@ -71,9 +71,9 @@ public class Controller {
         } else {
             System.out.println("Scene not found: " + name);
         }
-        System.out.println("Available scenes: " + scenes.keySet());
+        //System.out.println("Available scenes: " + scenes.keySet());
 
-        System.out.println("Switching to scene: " + name);
+        //System.out.println("Switching to scene: " + name);
     }
     public Timeline playAnimation(String imgURL, int frames, double duration, ImageView animatingObj)
     throws  IOException{

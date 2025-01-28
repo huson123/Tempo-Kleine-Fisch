@@ -7,6 +7,7 @@ import controller.tkfisch.main.Main;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -30,6 +31,9 @@ public class gameSceneController implements SceneController {
 
     @FXML
     AnchorPane pane;
+
+    @FXML
+    private Label fishScore,shipScore,result;
 
     @FXML
     private ImageView ship;
@@ -110,6 +114,7 @@ public class gameSceneController implements SceneController {
         String moveURL = null;
         String stillURL = null;
 
+        System.out.println(entities);
         //System.out.println(escapedFish);
         //System.out.println(caughtFish);
         //System.out.println(gameplay.getPlayerType());
@@ -119,9 +124,9 @@ public class gameSceneController implements SceneController {
             if (escapedFish.contains(color)
                     && (gameplay.getPlayerType().equals("Fish")
             )){
-                System.out.println(stage.getScene());
-                System.out.println("fish when fish escaped");
-                System.out.println("Fish escaped while being Fish");
+                //System.out.println(stage.getScene());
+                //System.out.println("fish when fish escaped");
+                //System.out.println("Fish escaped while being Fish");
                     // Add a delay of 1 second before switching scenes
                     addDelay(0.1, () -> {
                         fishSelectSceneController fishSSC =
@@ -132,19 +137,19 @@ public class gameSceneController implements SceneController {
                 return;
             }
             else if (escapedFish.contains(color) && (gameplay.getPlayerType().equals("Ship"))){
-                System.out.println("ship when fish escaped");
+                //System.out.println("ship when fish escaped");
                 do {
                     fishSelectedColor = gameplay.roll();
                 } while (gameplay.getEscapedFish().contains(fishSelectedColor));
                 color = fishSelectedColor;
                 fishSelectedColor = null;
             }
-            System.out.println("keep running");
+            //System.out.println("keep running");
             //System.out.println((((Fish) entity)).isCaught());
             //System.out.println(entity.getColors().get(0));
             if(caughtFish.contains(color)) {
                 // if fish has been caught boat move
-                System.out.println("fish caught");
+                //System.out.println("fish caught");
                 fishCaught = true;
                 actionEntity = ship;
                 moveURL = shipMoveURL;
@@ -218,13 +223,13 @@ public class gameSceneController implements SceneController {
                                 throw new RuntimeException(ex);
                             }
                             if (gameplay.fishEndUpdate(entity)) {
-                                gameplay.fishEndUpdate(entity);
                                 removeImageView(finalActionEntity);
+                                displayScore(fishScore);
                                 gameplay.addEscapedFish(entity.getColors().get(0));
                             }
                         });
                     } else if (entity.getType() == Entity.Type.SHIP || fishCaught) {
-                        System.out.println("ship called");
+                        //System.out.println("ship called");
                         //play ship move, if detect collision then play catch
                         //move
                         timeline = shipMove(moveURL, actionEntity);
@@ -233,6 +238,7 @@ public class gameSceneController implements SceneController {
                         timeline.setOnFinished(e -> {
                             moveImageView(14, tempEntity);
                             List<Entity> temp = gameplay.collisionUpdate(entity);
+                            displayScore(shipScore);
                             System.out.println(temp);
                             if (!temp.isEmpty()) {
                                 try {
@@ -307,6 +313,17 @@ public class gameSceneController implements SceneController {
         PauseTransition pause = new PauseTransition(Duration.seconds(seconds));
         pause.setOnFinished(event -> onComplete.run());
         pause.play();
+    }
+    private void displayScore (Label obj){
+        if (obj == fishScore){
+            fishScore.setText("Fish: " + gameplay.getFishScore());
+        }
+        else {
+            shipScore.setText("Ship: " + gameplay.getShipScore());
+        }
+    }
+    public void displayResult(String str){
+        result.setText(str);
     }
 
     //FISH SECTION
