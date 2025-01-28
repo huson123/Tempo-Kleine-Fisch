@@ -39,11 +39,13 @@ public class Main extends Application implements SceneController {
         diceSC = (diceSceneController) appController.getSceneController("dice");
         gameSC = (gameSceneController) appController.getSceneController("game");
         fishSSC = (fishSelectSceneController) appController.getSceneController("fishSelect");
+        startSC = (startSceneController) appController.getSceneController("start");
 
         //scenes init
         gameSC.init();
         diceSC.init();
         fishSSC.init();
+        startSC.init();
 
         startGameLoop();
     }

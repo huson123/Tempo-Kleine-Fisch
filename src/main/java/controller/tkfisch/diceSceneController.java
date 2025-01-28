@@ -54,7 +54,7 @@ public class diceSceneController implements SceneController {
         String tempResult = diceResult + resultColor + "/";
         System.out.println(resultColor);
         System.out.println(tempResult);
-        Timeline tl = appController.playAnimation(tempResult,22,0.1,dice);
+        Timeline tl = appController.playAnimation(tempResult,22,0.05,dice);
         tl.play();
         buttonFlag = true;
         button.setText("Continue");

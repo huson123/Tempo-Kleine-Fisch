@@ -27,10 +27,10 @@ public class gameSceneController implements SceneController {
     //timeline for idle
     private final Map<ImageView, Timeline> idleTimelines = new HashMap<>();
     private String fishSelectedColor;
-    private Stage stage;
 
     @FXML
     AnchorPane pane;
+    private String bg = "/animation/background/gameScene/";
 
     @FXML
     private Label fishScore,shipScore,result;
@@ -77,10 +77,9 @@ public class gameSceneController implements SceneController {
     public void init() throws IOException {
         gameplay = appController.getGameplay();
         entities = gameplay.getEntities();
-        stage = appController.getPrimaryStage();
 
 
-        //TODO add background animation
+
         Timeline temp = fishIdle(blueFishStillURL,blueFish);
         idleTimelines.put(blueFish,temp);
         temp.play();
@@ -99,6 +98,9 @@ public class gameSceneController implements SceneController {
 
         temp = shipIdle(shipStillURL,ship);
         idleTimelines.put(ship,temp);
+        temp.play();
+
+        temp = appController.setBackgroundAnimation(bg, 12,0.2,pane);
         temp.play();
     }
 
@@ -229,14 +231,20 @@ public class gameSceneController implements SceneController {
                             }
                         });
                     } else if (entity.getType() == Entity.Type.SHIP || fishCaught) {
+                        moveImageView(-4,tempEntity);
                         //System.out.println("ship called");
                         //play ship move, if detect collision then play catch
                         //move
                         timeline = shipMove(moveURL, actionEntity);
-                        moveImageView(18, tempEntity);
+                        //moveImageView(18, tempEntity);
                         timeline.play();
                         timeline.setOnFinished(e -> {
-                            moveImageView(14, tempEntity);
+                            moveImageView(36, tempEntity);
+                            //re adjust for smol animation
+                            ship.setFitHeight(124);
+                            ship.setFitWidth(105);
+                            ship.setY(ship.getY() + 20);
+
                             List<Entity> temp = gameplay.collisionUpdate(entity);
                             displayScore(shipScore);
                             System.out.println(temp);
@@ -336,6 +344,10 @@ public class gameSceneController implements SceneController {
 
     //SHIP SECTION
     public Timeline shipMove (String moveURL,ImageView ship) throws IOException {
+        //adjust for small animation
+        ship.setFitHeight(150);
+        ship.setFitWidth(150);
+        ship.setY(ship.getY() - 20);
         return appController.playAnimation(moveURL,6,0.2,ship);
     }
     public Timeline shipCatch (String catchURL, ImageView ship) throws IOException {
@@ -351,7 +363,7 @@ public class gameSceneController implements SceneController {
     }
     public void diceEntered(MouseEvent event) throws IOException {
         System.out.println("dice hovered");
-        Timeline tl = appController.playAnimation(diceIdleUrl,12, 0.2, dice);
+        Timeline tl = appController.playAnimation(diceIdleUrl,12, 0.1, dice);
         tl.play();
     }
     public void diceExited(MouseEvent event){
