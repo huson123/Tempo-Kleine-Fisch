@@ -47,18 +47,18 @@ public class gameSceneController implements SceneController {
 
     @FXML
     private ImageView orangeFish;
-    private final String orangeFishMoveURL = "/animation/fish/move/blueFishMove/";
-    private final String orangeFishStillURL = "/animation/fish/idle/blueFishStill/";
+    private final String orangeFishMoveURL = "/animation/fish/move/orangeFishMove/";
+    private final String orangeFishStillURL = "/animation/fish/idle/orangeFishStill/";
 
     @FXML
     private ImageView pinkFish;
-    private final String pinkFishMoveURL = "/animation/fish/move/blueFishMove/";
-    private final String pinkFishStillURL = "/animation/fish/idle/blueFishStill/";
+    private final String pinkFishMoveURL = "/animation/fish/move/pinkFishMove/";
+    private final String pinkFishStillURL = "/animation/fish/idle/pinkFishStill/";
 
     @FXML
     private ImageView yellowFish;
-    private final String yellowFishMoveURL = "/animation/fish/move/blueFishMove/";
-    private final String yellowFishStillURL = "/animation/fish/idle/blueFishStill/";;
+    private final String yellowFishMoveURL = "/animation/fish/move/yellowFishMove/";
+    private final String yellowFishStillURL = "/animation/fish/idle/yellowFishStill/";;
 
     @FXML
     private ImageView dice;
@@ -83,15 +83,15 @@ public class gameSceneController implements SceneController {
         idleTimelines.put(blueFish,temp);
         temp.play();
 
-        temp = fishIdle(blueFishStillURL,pinkFish);
+        temp = fishIdle(pinkFishStillURL,pinkFish);
         idleTimelines.put(pinkFish,temp);
         temp.play();
 
-        temp = fishIdle(blueFishStillURL,orangeFish);
+        temp = fishIdle(orangeFishStillURL,orangeFish);
         idleTimelines.put(orangeFish,temp);
         temp.play();
 
-        temp = fishIdle(blueFishStillURL,yellowFish);
+        temp = fishIdle(yellowFishStillURL,yellowFish);
         idleTimelines.put(yellowFish,temp);
         temp.play();
 
@@ -209,12 +209,16 @@ public class gameSceneController implements SceneController {
                     // Play the movement animation
 
                     if (entity.getType() == Entity.Type.FISH && !fishCaught) {
-                        moveImageView(18, tempEntity);
+                        //moveImageView(18, tempEntity);
                         timeline = fishMove(moveURL, actionEntity);
                         timeline.play();
                         ImageView finalActionEntity = actionEntity;
                         timeline.setOnFinished(e -> {
-                            moveImageView(14, tempEntity);
+                            moveImageView(32, tempEntity);
+                            //re adjust for smol animation
+                            finalActionEntity.setFitHeight(32);
+                            finalActionEntity.setFitWidth(32);
+                            finalActionEntity.setY(ship.getY() + 15);
                             try {
                                 // Start the idle animation again after moving
                                 Timeline newIdleTimeline = fishIdle(tempStillURL, tempEntity);
@@ -313,9 +317,6 @@ public class gameSceneController implements SceneController {
             }
         return null;
     }
-    public void setFishSelectedColor(String color){
-        fishSelectedColor = color;
-    }
     private void addDelay(double seconds, Runnable onComplete) {
         PauseTransition pause = new PauseTransition(Duration.seconds(seconds));
         pause.setOnFinished(event -> onComplete.run());
@@ -335,6 +336,10 @@ public class gameSceneController implements SceneController {
 
     //FISH SECTION
     public Timeline fishMove (String moveURL, ImageView fish) throws IOException {
+        //adjust for smol animation
+        fish.setFitHeight(70);
+        fish.setFitWidth(70);
+        fish.setY(ship.getY() - 15);
         return appController.playAnimation(moveURL,21,0.1,fish);
     }
     public Timeline fishIdle (String idleURL, ImageView fish) throws IOException {
