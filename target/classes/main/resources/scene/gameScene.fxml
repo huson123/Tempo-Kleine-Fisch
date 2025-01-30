@@ -18,7 +18,7 @@
             <Image url="@../image/dice.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="ship" fitHeight="100.0" fitWidth="120.0" layoutX="47.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ship" fitHeight="77.0" fitWidth="98.0" layoutX="66.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/shipReleased.jpg" />
          </image>
