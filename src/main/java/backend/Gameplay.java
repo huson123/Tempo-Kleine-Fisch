@@ -2,98 +2,140 @@ package backend;
 
 import java.util.*;
 
+/**
+ * The Gameplay class manages the main logic of the game, including the state of the game, 
+ * the entities involved, and the scores.
+ */
 public class Gameplay {
 
     private boolean gameOver = false; // flag 
-    
     private static final int SEA = 7; 
     private final Random random; 
-
     private List<Entity> entities;
     private List<String> diceColor = new ArrayList<>(Arrays.asList("Red", "Green", "Blue", "Yellow", "Pink", "Orange"));
     private List<Entity> entitiesToRemove = new ArrayList<>();
     private List<String> caughtFish = new ArrayList<>();
     private List<String> escapedFish = new ArrayList<>();
-
     private int shipScore;
     private int fishScore;
-
     private String playerType;
 
-    // Constructor 
-
-    public Gameplay()
-    {
+    /**
+     * Constructor for the Gameplay class.
+     * Initializes the entities, random generator, and scores.
+     */
+    public Gameplay() {
         this.entities = new ArrayList<>(); 
         this.random = new Random(); 
         this.shipScore = 0;
         this.fishScore = 0; 
-
-        //init();
     }
 
-    // Getter 
-    public boolean isGameOver()
-    {
+    /**
+     * Checks if the game is over.
+     * @return true if the game is over, false otherwise.
+     */
+    public boolean isGameOver() {
         return this.gameOver; 
     }
 
-    public int getShipScore()
-    {
+    /**
+     * Gets the current score of the ship.
+     * @return the ship's score.
+     */
+    public int getShipScore() {
         return this.shipScore;
     } 
 
-    public int getFishScore()
-    {
+    /**
+     * Gets the current score of the fish.
+     * @return the fish's score.
+     */
+    public int getFishScore() {
         return this.fishScore; 
     } 
 
-    public List<String> getDiceColor()
-    {
+    /**
+     * Gets the list of dice colors.
+     * @return the list of dice colors.
+     */
+    public List<String> getDiceColor() {
         return this.diceColor;
     }
 
-    public List<Entity> getEntities()
-    {
+    /**
+     * Gets the list of entities in the game.
+     * @return the list of entities.
+     */
+    public List<Entity> getEntities() {
         return this.entities;
     }
 
-    public String getPlayerType(){return this.playerType;}
+    /**
+     * Gets the player type.
+     * @return the player type.
+     */
+    public String getPlayerType() {
+        return this.playerType;
+    }
 
-    public void addCaughtFish(String color){
+    /**
+     * Adds a caught fish color to the list.
+     * @param color the color of the caught fish.
+     */
+    public void addCaughtFish(String color) {
         caughtFish.add(color);
     }
-    public List<String> getCaughtFish(){
+
+    /**
+     * Gets the list of caught fish colors.
+     * @return the list of caught fish colors.
+     */
+    public List<String> getCaughtFish() {
         return caughtFish;
     }
-    public void addEscapedFish(String color){
+
+    /**
+     * Adds an escaped fish color to the list.
+     * @param color the color of the escaped fish.
+     */
+    public void addEscapedFish(String color) {
         escapedFish.add(color);
     }
-    public List <String> getEscapedFish(){
+
+    /**
+     * Gets the list of escaped fish colors.
+     * @return the list of escaped fish colors.
+     */
+    public List<String> getEscapedFish() {
         return escapedFish;
     }
 
-    // Setter 
-
-    public void setGameOver()
-    {
+    /**
+     * Sets the game over flag to true.
+     */
+    public void setGameOver() {
         this.gameOver = true;
     }
 
-    public void addShipScore()
-    {
+    /**
+     * Increments the ship's score by one.
+     */
+    public void addShipScore() {
         this.shipScore++;
     }
 
-    public void addFishScore()
-    {
+    /**
+     * Increments the fish's score by one.
+     */
+    public void addFishScore() {
         this.fishScore++; 
     }
 
-    // Method 
-    public void init()
-    {
-        //System.out.println("gameplay init");
+    /**
+     * Initializes the game by adding initial entities.
+     */
+    public void init() {
         entities.add(new Ship("ship", new ArrayList<>(Arrays.asList("Red", "Green"))));
         entities.add(new Fish(6,250,216,"blueFish", "Blue"));
         entities.add(new Fish(-4,250,230,"yellowFish", "Yellow"));
@@ -101,82 +143,91 @@ public class Gameplay {
         entities.add(new Fish(0,250,258,"orangeFish", "Orange"));
     }
 
-    public String roll()
-    {
+    /**
+     * Rolls the dice to get a random color.
+     * @return the color obtained from the dice roll.
+     */
+    public String roll() {
         List<String> colors = getDiceColor();
-        
-        // roll 
         int randomIndex = random.nextInt(colors.size());
         return colors.get(randomIndex);
     }
 
-
+    /**
+     * Updates the game state based on collisions between the ship and fish.
+     * @param entity the ship entity.
+     * @return a list of fish entities that were caught by the ship.
+     */
     public List<Entity> collisionUpdate(Entity entity) {
-        //check when ship hit FISH
-        //entity is already ship
-        //return a list of fish to be deleted from pane
         List<Entity> deletedFish = new ArrayList<>();
-
-                // Check for collisions with FISH
-                for (Entity fish : entities) {
-                    if (fish.getType() == Entity.Type.FISH && fish.getPosition() == entity.getPosition()) {
-                        System.out.println(fish.getPosition());
-                        System.out.println(entity.getPosition());
-                        addShipScore();
-//                        ((Ship) entity).addColor(FISH.getColors().get(0));
-                        entitiesToRemove.add(fish); // Mark the FISH for removal
-                        deletedFish.add(fish);
-                    }
-                }
-        // Remove all marked entities after the iteration
+        for (Entity fish : entities) {
+            if (fish.getType() == Entity.Type.FISH && fish.getPosition() == entity.getPosition()) {
+                addShipScore();
+                entitiesToRemove.add(fish); // Mark the fish for removal
+                deletedFish.add(fish);
+            }
+        }
         entities.removeAll(entitiesToRemove);
         entitiesToRemove.clear();
         return deletedFish;
     }
-    public boolean fishEndUpdate(Entity entity){
+
+    /**
+     * Updates the game state when a fish reaches the sea.
+     * @param entity the fish entity.
+     * @return true if the fish reached the sea, false otherwise.
+     */
+    public boolean fishEndUpdate(Entity entity) {
         boolean flag = false;
-        //check for when a FISH reach the sea
-        //entity is already fish
-            // If the entity is a FISH
-            if (entity.getType() == Entity.Type.FISH) {
-                if (entity.getPosition() >= SEA) {
-                    flag = true;
-                    addFishScore();
-                    entitiesToRemove.add(entity); // Mark the FISH for removal
-                }
+        if (entity.getType() == Entity.Type.FISH) {
+            if (entity.getPosition() >= SEA) {
+                flag = true;
+                addFishScore();
+                entitiesToRemove.add(entity); // Mark the fish for removal
             }
-            entities.removeAll(entitiesToRemove);
-            entitiesToRemove.clear();
-            return flag;
+        }
+        entities.removeAll(entitiesToRemove);
+        entitiesToRemove.clear();
+        return flag;
     }
-    public void endGameUpdate(){
-        // End the game if no FISH are left
-        //System.out.println("endGameUpdate called");
+
+    /**
+     * Ends the game if no fish are left.
+     */
+    public void endGameUpdate() {
         if (entities.stream().noneMatch(e -> e.getType() == Entity.Type.FISH)) {
             setGameOver();
-            System.out.println("working");
-        }
-    }
-    public String printResult()
-    {
-        if (getPlayerType().equals("Ship")){
-            if (getShipScore() > getFishScore()){
-                return "You Win!";
-            } else if (getShipScore() < getFishScore()) {
-                return "You Lose!";
-            }
-            else return "Tie!";
-        }
-        else {
-            if (getShipScore() < getFishScore()){
-                return "You Win!";
-            } else if (getShipScore() > getFishScore()) {
-                return "You Lose!";
-            }
-            else return "Tie!";
         }
     }
 
+    /**
+     * Prints the result of the game based on the scores.
+     * @return the result of the game as a string.
+     */
+    public String printResult() {
+        if (getPlayerType().equals("Ship")) {
+            if (getShipScore() > getFishScore()) {
+                return "You Win!";
+            } else if (getShipScore() < getFishScore()) {
+                return "You Lose!";
+            } else {
+                return "Tie!";
+            }
+        } else {
+            if (getShipScore() < getFishScore()) {
+                return "You Win!";
+            } else if (getShipScore() > getFishScore()) {
+                return "You Lose!";
+            } else {
+                return "Tie!";
+            }
+        }
+    }
+
+    /**
+     * Sets the player type.
+     * @param playerType the type of the player (e.g., "Ship" or "Fish").
+     */
     public void setPlayerType(String playerType) {
         this.playerType = playerType;
         System.out.println("Player type set to: " + playerType);
