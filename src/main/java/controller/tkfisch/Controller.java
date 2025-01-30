@@ -1,5 +1,9 @@
 package controller.tkfisch;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import backend.Gameplay;
 import javafx.animation.KeyFrame;
 import javafx.animation.SequentialTransition;
@@ -8,13 +12,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Controller {
     private final Stage primaryStage; // Reference to the primary stage
@@ -32,6 +37,7 @@ public class Controller {
         try {
             // Load scenes and their controllers
             addScene("start", "/scene/startScene.fxml");
+            addScene("instruction", "/scene/instructionScene.fxml");
             addScene("select", "/scene/selectScene.fxml");
             addScene("game", "/scene/gameScene.fxml");
             addScene("dice", "/scene/diceScene.fxml");

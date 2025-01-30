@@ -1,13 +1,19 @@
 package controller.tkfisch.main;
 
-import controller.tkfisch.*;
+import java.io.IOException;
+
+import backend.Gameplay;
+import controller.tkfisch.Controller;
+import controller.tkfisch.SceneController;
+import controller.tkfisch.diceSceneController;
+import controller.tkfisch.fishSelectSceneController;
+import controller.tkfisch.gameSceneController;
+import controller.tkfisch.instructionSceneController;
+import controller.tkfisch.selectSceneController;
+import controller.tkfisch.startSceneController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import backend.Gameplay;
-
-import java.io.IOException;
 
 public class Main extends Application implements SceneController {
     //import controllers
@@ -16,6 +22,7 @@ public class Main extends Application implements SceneController {
     private fishSelectSceneController fishSSC;
     private selectSceneController sceneSC;
     private startSceneController startSC;
+    private instructionSceneController instructionSC;
 
     private Gameplay gameplay;
     private Controller appController;
@@ -40,12 +47,14 @@ public class Main extends Application implements SceneController {
         gameSC = (gameSceneController) appController.getSceneController("game");
         fishSSC = (fishSelectSceneController) appController.getSceneController("fishSelect");
         startSC = (startSceneController) appController.getSceneController("start");
+        instructionSC = (instructionSceneController) appController.getSceneController("instruction");
 
         //scenes init
         gameSC.init();
         diceSC.init();
         fishSSC.init();
         startSC.init();
+        instructionSC.init();
 
         startGameLoop();
     }

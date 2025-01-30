@@ -28,4 +28,10 @@ public class startSceneController implements SceneController {
    public void switchToSelect(ActionEvent event) {
       appController.switchToScene("select");
    }
+   public void switchToInstruction(ActionEvent event) {
+      appController.switchToScene("instruction");
+   }
+   public void Exit(ActionEvent event) {
+      System.exit(0);
+   }
 }
