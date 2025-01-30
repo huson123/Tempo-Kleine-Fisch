@@ -9,6 +9,8 @@ import controller.tkfisch.diceSceneController;
 import controller.tkfisch.fishSelectSceneController;
 import controller.tkfisch.gameSceneController;
 import controller.tkfisch.instructionSceneController;
+import controller.tkfisch.resultLSceneController;
+import controller.tkfisch.resultWSceneController;
 import controller.tkfisch.selectSceneController;
 import controller.tkfisch.startSceneController;
 import javafx.animation.AnimationTimer;
@@ -23,6 +25,8 @@ public class Main extends Application implements SceneController {
     private selectSceneController sceneSC;
     private startSceneController startSC;
     private instructionSceneController instructionSC;
+    private resultWSceneController resultWSC;
+    private resultLSceneController resultLSC;
 
     private Gameplay gameplay;
     private Controller appController;
@@ -48,6 +52,8 @@ public class Main extends Application implements SceneController {
         fishSSC = (fishSelectSceneController) appController.getSceneController("fishSelect");
         startSC = (startSceneController) appController.getSceneController("start");
         instructionSC = (instructionSceneController) appController.getSceneController("instruction");
+        resultWSC = (resultWSceneController) appController.getSceneController("resultW");
+        resultLSC = (resultLSceneController) appController.getSceneController("resultL");
 
         //scenes init
         gameSC.init();
@@ -55,6 +61,8 @@ public class Main extends Application implements SceneController {
         fishSSC.init();
         startSC.init();
         instructionSC.init();
+        resultWSC.init();
+        resultLSC.init();
 
         startGameLoop();
     }
@@ -81,9 +89,9 @@ public class Main extends Application implements SceneController {
                     //System.out.println(gameplay.getEntities());
                 }
                 else {
-                    System.out.println("result");
-                    gameSC.displayResult(gameplay.printResult());
                     gameloop.stop();
+                    if (gameplay.printResult().equals("You Win!"))   appController.switchToScene("resultW");
+                    if (gameplay.printResult().equals("You Lose!"))   appController.switchToScene("resultL");
                 }
             }
         };
