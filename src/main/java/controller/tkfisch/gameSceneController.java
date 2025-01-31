@@ -225,7 +225,7 @@ public class gameSceneController implements SceneController {
                             //re adjust for smol animation
                             finalActionEntity.setFitHeight(32);
                             finalActionEntity.setFitWidth(32);
-                            finalActionEntity.setY(ship.getY() + 15);
+                            finalActionEntity.setY(ship.getY());
                             try {
                                 // Start the idle animation again after moving
                                 Timeline newIdleTimeline = fishIdle(tempStillURL, tempEntity);
@@ -252,8 +252,8 @@ public class gameSceneController implements SceneController {
                         timeline.setOnFinished(e -> {
                             moveImageView(42, tempEntity);
                             //re adjust for smol animation
-                            ship.setFitHeight(100);
-                            ship.setFitWidth(85);
+                            ship.setFitHeight(75);
+                            ship.setFitWidth(75);
                             ship.setY(ship.getY() + 32);
 
                             List<Entity> temp = gameplay.collisionUpdate(entity);
