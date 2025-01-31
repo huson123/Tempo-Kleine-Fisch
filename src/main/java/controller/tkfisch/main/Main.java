@@ -10,6 +10,7 @@ import controller.tkfisch.fishSelectSceneController;
 import controller.tkfisch.gameSceneController;
 import controller.tkfisch.instructionSceneController;
 import controller.tkfisch.resultLSceneController;
+import controller.tkfisch.resultTSceneController;
 import controller.tkfisch.resultWSceneController;
 import controller.tkfisch.selectSceneController;
 import controller.tkfisch.startSceneController;
@@ -27,6 +28,7 @@ public class Main extends Application implements SceneController {
     private instructionSceneController instructionSC;
     private resultWSceneController resultWSC;
     private resultLSceneController resultLSC;
+    private resultTSceneController resultTSC;
 
     private Gameplay gameplay;
     private Controller appController;
@@ -54,6 +56,7 @@ public class Main extends Application implements SceneController {
         instructionSC = (instructionSceneController) appController.getSceneController("instruction");
         resultWSC = (resultWSceneController) appController.getSceneController("resultW");
         resultLSC = (resultLSceneController) appController.getSceneController("resultL");
+        resultTSC = (resultTSceneController) appController.getSceneController("resultT");
 
         //scenes init
         gameSC.init();
@@ -63,6 +66,7 @@ public class Main extends Application implements SceneController {
         instructionSC.init();
         resultWSC.init();
         resultLSC.init();
+        resultTSC.init();
 
         startGameLoop();
     }
@@ -92,6 +96,7 @@ public class Main extends Application implements SceneController {
                     gameloop.stop();
                     if (gameplay.printResult().equals("You Win!"))   appController.switchToScene("resultW");
                     if (gameplay.printResult().equals("You Lose!"))   appController.switchToScene("resultL");
+                    if (gameplay.printResult().equals("Tie!"))   appController.switchToScene("resultT");
                 }
             }
         };
