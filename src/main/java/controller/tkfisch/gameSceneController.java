@@ -139,15 +139,22 @@ public class gameSceneController implements SceneController {
             }
             else if (escapedFish.contains(color) && (gameplay.getPlayerType().equals("Ship"))){
                 //System.out.println("ship when fish escaped");
+                // if the color already escaped, and the play is of ship type, then random a color
                 do {
                     fishSelectedColor = gameplay.roll();
-                } while (gameplay.getEscapedFish().contains(fishSelectedColor));
+                    System.out.println(fishSelectedColor);
+                } while (escapedFish.contains(fishSelectedColor)
+                        || caughtFish.contains(fishSelectedColor)
+                        || fishSelectedColor.equals("Green")
+                        || fishSelectedColor.equals("Red"));
                 color = fishSelectedColor;
                 fishSelectedColor = null;
             }
             //System.out.println("keep running");
             //System.out.println((((Fish) entity)).isCaught());
             //System.out.println(entity.getColors().get(0));
+            //System.out.println(caughtFish);
+            //System.out.println(escapedFish);
             if(caughtFish.contains(color)) {
                 // if fish has been caught boat move
                 //System.out.println("fish caught");
@@ -234,7 +241,8 @@ public class gameSceneController implements SceneController {
                             }
                         });
                     } else if (entity.getType() == Entity.Type.SHIP || fishCaught) {
-                        moveImageView(-4,tempEntity);
+                        fishCaught = false;
+                        moveImageView(-10,tempEntity);
                         //System.out.println("ship called");
                         //play ship move, if detect collision then play catch
                         //move
@@ -242,7 +250,7 @@ public class gameSceneController implements SceneController {
                         //moveImageView(18, tempEntity);
                         timeline.play();
                         timeline.setOnFinished(e -> {
-                            moveImageView(36, tempEntity);
+                            moveImageView(42, tempEntity);
                             //re adjust for smol animation
                             ship.setFitHeight(100);
                             ship.setFitWidth(85);
@@ -286,7 +294,6 @@ public class gameSceneController implements SceneController {
                                 }
                             }
                         });
-                        fishCaught = false;
                     }
 
 
