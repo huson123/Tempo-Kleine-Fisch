@@ -7,6 +7,7 @@ module controller.tkfisch {
     requires java.desktop;
 
     requires javafx.media;
+    requires java.sql;
 
     opens controller.tkfisch to javafx.fxml;
     opens scene to javafx.fxml;
