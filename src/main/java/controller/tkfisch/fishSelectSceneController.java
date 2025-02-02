@@ -22,22 +22,11 @@ public class fishSelectSceneController implements SceneController {
     @FXML
     private ImageView blueFish, pinkFish, yellowFish, orangeFish;
 
-    private final Image blueFishPressed = new Image(getClass().getResourceAsStream("/image/blueFishPressed.jpg"));
-    private final Image blueFishReleased = new Image(getClass().getResourceAsStream("/image/blueFishReleased.png"));
-
-    private final Image pinkFishPressed = new Image(getClass().getResourceAsStream("/image/pinkFishPressed.jpg"));
-    private final Image pinkFishReleased = new Image(getClass().getResourceAsStream("/image/pinkFishReleased.jpg"));
-
-    private final Image yellowFishPressed = new Image(getClass().getResourceAsStream("/image/yellowFishPressed.jpg"));
-    private final Image yellowFishReleased = new Image(getClass().getResourceAsStream("/image/yellowFishReleased.jpg"));
-
-    private final Image orangeFishPressed = new Image(getClass().getResourceAsStream("/image/orangeFishPressed.jpg"));
-    private final Image orangeFishReleased = new Image(getClass().getResourceAsStream("/image/orangeFishReleased.jpg"));
-
     @Override
     public void setAppController(Controller appController) {
         this.appController = appController;
     }
+
 
     public void switchToGame() {
         try {
@@ -86,22 +75,24 @@ public class fishSelectSceneController implements SceneController {
     }
 
     public void blueFishPressed() throws IOException {
-        blueFish.setImage(blueFishPressed);
+        //blueFish.setImage(blueFishPressed);
         //gameSC.setFishSelectedColor("Blue");
         gameSC.move("Blue");
         switchToGame();
     }
 
     public void blueFishEntered() {
-        blueFish.setImage(blueFishPressed);
+        //blueFish.setImage(blueFishPressed);
+        blueFish.setOpacity(1);
     }
 
     public void blueFishExited() {
-        blueFish.setImage(blueFishReleased);
+        //blueFish.setImage(blueFishReleased);
+        blueFish.setOpacity(0.5);
     }
 
     public void pinkFishPressed() throws IOException {
-        pinkFish.setImage(pinkFishPressed);
+        //pinkFish.setImage(pinkFishPressed);
         //gameSC.setFishSelectedColor("Pink");
         gameSC.move("Pink");
         switchToGame();
@@ -109,15 +100,17 @@ public class fishSelectSceneController implements SceneController {
     }
 
     public void pinkFishEntered() {
-        pinkFish.setImage(pinkFishPressed);
+        //pinkFish.setImage(pinkFishPressed);
+        pinkFish.setOpacity(1);
     }
 
     public void pinkFishExited() {
-        pinkFish.setImage(pinkFishReleased);
+        //pinkFish.setImage(pinkFishReleased);
+        pinkFish.setOpacity(0.5);
     }
 
     public void orangeFishPressed() throws IOException {
-        orangeFish.setImage(orangeFishPressed);
+        //orangeFish.setImage(orangeFishPressed);
         //gameSC.setFishSelectedColor("Orange");
         gameSC.move("Orange");
         switchToGame();
@@ -125,15 +118,17 @@ public class fishSelectSceneController implements SceneController {
     }
 
     public void orangeFishEntered() {
-        orangeFish.setImage(orangeFishPressed);
+        //orangeFish.setImage(orangeFishPressed);
+        orangeFish.setOpacity(1);
     }
 
     public void orangeFishExited() {
-        orangeFish.setImage(orangeFishReleased);
+        //orangeFish.setImage(orangeFishReleased);
+        orangeFish.setOpacity(0.5);
     }
 
     public void yellowFishPressed() throws IOException {
-        yellowFish.setImage(yellowFishPressed);
+        //yellowFish.setImage(yellowFishPressed);
         //gameSC.setFishSelectedColor("Yellow");
         gameSC.move("Yellow");
         switchToGame();
@@ -141,10 +136,12 @@ public class fishSelectSceneController implements SceneController {
     }
 
     public void yellowFishEntered() {
-        yellowFish.setImage(yellowFishPressed);
+        //yellowFish.setImage(yellowFishPressed);
+        yellowFish.setOpacity(1);
     }
 
     public void yellowFishExited() {
-        yellowFish.setImage(yellowFishReleased);
+        //yellowFish.setImage(yellowFishReleased);
+        yellowFish.setOpacity(0.5);
     }
 }

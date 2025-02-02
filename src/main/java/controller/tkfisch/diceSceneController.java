@@ -3,6 +3,7 @@ package controller.tkfisch;
 import java.io.IOException;
 
 import backend.Gameplay;
+import javafx.animation.Animation;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ public class diceSceneController implements SceneController {
     private Gameplay gameplay;
     private String diceResult = "/animation/dice/result/diceResult";
     private String resultColor;
+    private Timeline tl = new Timeline();
     @FXML
     private ImageView dice;
     @FXML
@@ -53,15 +55,19 @@ public class diceSceneController implements SceneController {
             return;
         }
         //play animation according to result colour
-        resultColor = rollDice();
-        String tempResult = diceResult + resultColor + "/";
-        System.out.println(resultColor);
-        System.out.println(tempResult);
-        Timeline tl = appController.playAnimation(tempResult,22,0.05,dice);
-        tl.play();
-        buttonFlag = true;
-        button.setText("Continue");
-        music();
+        if (!(tl.getStatus() == Animation.Status.RUNNING)){
+            resultColor = rollDice();
+            String tempResult = diceResult + resultColor + "/";
+            //System.out.println(resultColor);
+            //System.out.println(tempResult);
+            tl = appController.playAnimation(tempResult,22,0.05,dice);
+            tl.play();
+            music();
+            tl.setOnFinished(e -> {
+                buttonFlag = true;
+                button.setText("Continue");
+            });
+        }
 
     }
     public String getResultColor(){

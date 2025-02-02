@@ -25,7 +25,7 @@ public class Main extends Application implements SceneController {
     private diceSceneController diceSC;
     private gameSceneController gameSC;
     private fishSelectSceneController fishSSC;
-    private selectSceneController sceneSC;
+    private selectSceneController selectSC;
     private startSceneController startSC;
     private instructionSceneController instructionSC;
     private resultWSceneController resultWSC;
@@ -60,6 +60,7 @@ public class Main extends Application implements SceneController {
         fishSSC = (fishSelectSceneController) appController.getSceneController("fishSelect");
         startSC = (startSceneController) appController.getSceneController("start");
         instructionSC = (instructionSceneController) appController.getSceneController("instruction");
+
 
         //scenes init
         diceSC.init();
