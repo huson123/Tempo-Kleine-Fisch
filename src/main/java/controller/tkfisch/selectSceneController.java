@@ -1,31 +1,42 @@
 package controller.tkfisch;
 
-import javafx.scene.input.MouseEvent;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import java.io.IOException;
 
 import backend.Gameplay;
+import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class selectSceneController implements SceneController {
     private Controller appController;
+    private gameSceneController gameSC;
+
+    @FXML
+    public void init(){};
 
     @Override
     public void setAppController(Controller appController) {
         this.appController = appController;
     }
 
-    public void fishPressed(MouseEvent event) {
+    public void fishPressed(MouseEvent event) throws IOException{
+        music();
+        gameSC = (gameSceneController) appController.getSceneController("game");
         Gameplay gameplay = appController.getGameplay();
         gameplay.setPlayerType("Fish"); // Update backend logic
+        gameSC.init();
         appController.switchToScene("game");
         //System.out.println("gaming");
 
     }
 
-    public void shipPressed(MouseEvent event) {
+    public void shipPressed(MouseEvent event) throws IOException{
+        music();
+        gameSC = (gameSceneController) appController.getSceneController("game");
         Gameplay gameplay = appController.getGameplay();
         gameplay.setPlayerType("Ship");
+        gameSC.init();
         appController.switchToScene("game");
 
     }
@@ -50,5 +61,14 @@ public class selectSceneController implements SceneController {
     public void fishExited(MouseEvent event) {
         System.out.println("Mouse exited the FISH image.");
         // Add hover effect logic here, e.g., resetting opacity
+    }
+
+    MediaPlayer mediaPlayer;
+    public void music(){
+        String s = getClass().getResource("/music/tap.mp3").toExternalForm();
+        Media h = new Media(s);
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.setVolume(0.1);
+        mediaPlayer.play();
     }
 }
