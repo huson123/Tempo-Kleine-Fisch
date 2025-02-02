@@ -138,6 +138,7 @@ public class Main extends Application implements SceneController {
         Media h = new Media(s);
         mediaPlayer = new MediaPlayer(h);
         mediaPlayer.setVolume(0.5);
+        mediaPlayer.setCycleCount(mediaPlayer.INDEFINITE);
         mediaPlayer.play();
     }
     public void musicW(){
