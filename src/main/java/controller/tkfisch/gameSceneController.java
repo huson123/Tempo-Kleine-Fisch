@@ -135,7 +135,11 @@ public class gameSceneController implements SceneController {
                         fishSelectSceneController fishSSC =
                                 (fishSelectSceneController) appController.getSceneController("fishSelect");
                         appController.switchToScene("fishSelect");
-                        fishSSC.init();
+                        try {
+                            fishSSC.init();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     });
                 return;
             }

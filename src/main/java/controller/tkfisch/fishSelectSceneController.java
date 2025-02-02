@@ -1,6 +1,8 @@
 package controller.tkfisch;
 
 import backend.Gameplay;
+import javafx.animation.Animation;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -15,9 +17,13 @@ public class fishSelectSceneController implements SceneController {
     private Controller appController;
     private gameSceneController gameSC;
     private Gameplay gameplay;
+    private String bg = "/animation/background/start/";
+    Timeline tl = new Timeline();
 
     @FXML
     private AnchorPane pane;
+    @FXML
+    private AnchorPane bgPane;
 
     @FXML
     private ImageView blueFish, pinkFish, yellowFish, orangeFish;
@@ -35,13 +41,18 @@ public class fishSelectSceneController implements SceneController {
             e.printStackTrace();
         }
     }
-    public void init(){
+    public void init() throws IOException {
        gameSC = (gameSceneController) appController.getSceneController("game");
        gameplay = appController.getGameplay();
+        if (!(tl.getStatus() == Animation.Status.RUNNING)){
+            tl = appController.setBackgroundAnimation(bg, 12, 0.2, pane);
+            tl.play();
+            pane.setOpacity(0.8);
+        }
+        nonColor();
        //System.out.println(gameplay);
        //System.out.println(gameSC);
        //System.out.println(blueFish.getScene() == appController.getScene("fishSelect"));
-       nonColor();
     }
 
     public void nonColor(){
@@ -58,7 +69,7 @@ public class fishSelectSceneController implements SceneController {
     }
     public void removeImageView(ImageView obj){
         //System.out.println("Removed ImageView: " + obj);
-        pane.getChildren().remove(obj);
+        bgPane.getChildren().remove(obj);
     }
     public ImageView convertStrToImageView(String color){
         switch (color){
