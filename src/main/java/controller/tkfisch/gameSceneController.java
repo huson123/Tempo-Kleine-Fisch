@@ -356,7 +356,7 @@ public class gameSceneController implements SceneController {
         //adjust for smol animation
         fish.setFitHeight(70);
         fish.setFitWidth(70);
-        fish.setY(ship.getY() - 15);
+        fish.setY(ship.getY() - 23);
         return appController.playAnimation(moveURL,21,0.1,fish);
     }
     public Timeline fishIdle (String idleURL, ImageView fish) throws IOException {

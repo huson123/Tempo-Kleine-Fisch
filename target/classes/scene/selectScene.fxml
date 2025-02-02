@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.tkfisch.selectSceneController">
    <children>
       <AnchorPane fx:id="pane" layoutX="-2.0" layoutY="-1.0" prefHeight="371.0" prefWidth="542.0" />
-      <Label layoutX="69.0" layoutY="35.0" text="SELECT YOUR SIDE" textFill="#0011ff">
-         <font>
-            <Font name="Book Antiqua Bold" size="40.0" />
-         </font>
-      </Label>
+      <ImageView fitHeight="388.0" fitWidth="652.0" layoutX="63.0" layoutY="-119.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/selectside.png" />
+         </image>
+      </ImageView>
       <ImageView fx:id="ship" fitHeight="181.0" fitWidth="197.0" layoutX="63.0" layoutY="105.0" onMouseEntered="#shipEntered" onMouseExited="#shipExited" onMousePressed="#shipPressed" opacity="0.5" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/shipSelect.png" />

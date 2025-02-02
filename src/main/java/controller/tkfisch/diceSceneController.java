@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import backend.Gameplay;
 import javafx.animation.Animation;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,6 +18,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 public class diceSceneController implements SceneController {
     private Controller appController;
@@ -65,8 +67,10 @@ public class diceSceneController implements SceneController {
         
         if (buttonFlag){
             buttonFlag = false;
-            rollButtonImageView.setVisible(true);
-            switchToGame();
+            addDelay(0.1, () -> {
+                rollButtonImageView.setVisible(true);
+                switchToGame();
+            });
             return;
         }
         //play animation according to result colour
@@ -85,6 +89,12 @@ public class diceSceneController implements SceneController {
             });
         }
 
+    }
+
+    private void addDelay(double seconds, Runnable onComplete) {
+        PauseTransition pause = new PauseTransition(Duration.seconds(seconds));
+        pause.setOnFinished(event -> onComplete.run());
+        pause.play();
     }
     public String getResultColor(){
         return resultColor;
