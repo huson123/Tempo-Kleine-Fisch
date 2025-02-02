@@ -12,8 +12,8 @@ module controller.tkfisch {
     opens controller.tkfisch to javafx.fxml;
     opens scene to javafx.fxml;
     exports controller.tkfisch;
-    exports controller.tkfisch.main;
-    opens controller.tkfisch.main to javafx.fxml;
+    exports main;
+    opens main to javafx.fxml;
 
 
 }
