@@ -268,6 +268,7 @@ public class gameSceneController implements SceneController {
                                 try {
                                     //catch
                                     timeline = shipCatch(shipCatchURL, ship);
+                                    musicc();
                                 } catch (IOException ex) {
                                     throw new RuntimeException(ex);
                                 }
@@ -421,6 +422,14 @@ public class gameSceneController implements SceneController {
         Media h = new Media(s);
         mediaPlayer = new MediaPlayer(h);
         mediaPlayer.setVolume(0.5);
+        mediaPlayer.play();
+    }
+
+    public void musicc(){
+        String s = getClass().getResource("/music/catched.mp3").toExternalForm();
+        Media h = new Media(s);
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.setVolume(0.1);
         mediaPlayer.play();
     }
 }

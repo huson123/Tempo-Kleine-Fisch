@@ -1,12 +1,14 @@
 package controller.tkfisch;
 
+import java.io.IOException;
+
 import backend.Gameplay;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-
-import java.io.IOException;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class diceSceneController implements SceneController {
     private Controller appController;
@@ -42,6 +44,7 @@ public class diceSceneController implements SceneController {
         return gameplay.roll();
     }
     public void displayResult() throws IOException {
+        stopMusic();
         if (buttonFlag){
             buttonFlag = false;
             button.setText("Roll");
@@ -58,6 +61,7 @@ public class diceSceneController implements SceneController {
         tl.play();
         buttonFlag = true;
         button.setText("Continue");
+        music();
 
     }
     public String getResultColor(){
@@ -67,4 +71,17 @@ public class diceSceneController implements SceneController {
         this.resultColor = color;
     }
 
+    MediaPlayer mediaPlayer;
+    public void music(){
+        String s = getClass().getResource("/music/roll.mp3").toExternalForm();
+        Media h = new Media(s);
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.setVolume(0.2);
+        mediaPlayer.play();
+    }
+    public void stopMusic() {
+        if (mediaPlayer != null) {
+        mediaPlayer.stop();
+        }
+    }
 }
