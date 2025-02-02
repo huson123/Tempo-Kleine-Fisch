@@ -15,6 +15,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class gameSceneController implements SceneController {
@@ -218,6 +220,7 @@ public class gameSceneController implements SceneController {
                     if (entity.getType() == Entity.Type.FISH && !fishCaught) {
                         //moveImageView(18, tempEntity);
                         timeline = fishMove(moveURL, actionEntity);
+                        musicf();
                         timeline.play();
                         ImageView finalActionEntity = actionEntity;
                         timeline.setOnFinished(e -> {
@@ -235,6 +238,7 @@ public class gameSceneController implements SceneController {
                                 throw new RuntimeException(ex);
                             }
                             if (gameplay.fishEndUpdate(entity)) {
+                                musicFinish();
                                 removeImageView(finalActionEntity);
                                 displayScore(fishScore);
                                 gameplay.addEscapedFish(entity.getColors().get(0));
@@ -247,6 +251,7 @@ public class gameSceneController implements SceneController {
                         //play ship move, if detect collision then play catch
                         //move
                         timeline = shipMove(moveURL, actionEntity);
+                        musics();
                         //moveImageView(18, tempEntity);
                         timeline.play();
                         timeline.setOnFinished(e -> {
@@ -370,6 +375,7 @@ public class gameSceneController implements SceneController {
 
     //DICE SECTION
     public void dicePressed(MouseEvent event) throws IOException {
+        music();
         appController.switchToScene("dice");
     }
     public void diceEntered(MouseEvent event) throws IOException {
@@ -380,5 +386,41 @@ public class gameSceneController implements SceneController {
     public void diceExited(MouseEvent event){
         System.out.println("dice exited");
         dice.setImage(new Image(getClass().getResourceAsStream("/image/dice.png")));
+    }
+
+    MediaPlayer mediaPlayer;
+    public void musicf(){
+        String s = getClass().getResource("/music/splashmusic.mp3").toExternalForm();
+        Media h = new Media(s);
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.setVolume(0.2);
+        PauseTransition delay = new PauseTransition(Duration.seconds(5));
+        delay.setOnFinished(event -> mediaPlayer.play());
+        delay.play();
+        mediaPlayer.play();
+    }
+    
+    public void musics(){
+        String s = getClass().getResource("/music/shipmove.mp3").toExternalForm();
+        Media h = new Media(s);
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.setVolume(0.2);
+        mediaPlayer.play();
+    }
+
+    public void music(){
+        String s = getClass().getResource("/music/tap.mp3").toExternalForm();
+        Media h = new Media(s);
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.setVolume(0.1);
+        mediaPlayer.play();
+    }
+
+    public void musicFinish(){
+        String s = getClass().getResource("/music/finish.mp3").toExternalForm();
+        Media h = new Media(s);
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.setVolume(0.5);
+        mediaPlayer.play();
     }
 }
