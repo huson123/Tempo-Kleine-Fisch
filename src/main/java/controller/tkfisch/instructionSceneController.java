@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class instructionSceneController implements SceneController {
     private Controller appController;
@@ -28,10 +30,20 @@ public class instructionSceneController implements SceneController {
         Timeline tl = new Timeline();
         tl = appController.setBackgroundAnimation(bg, 12, 0.2, pane);
         tl.play();
-        pane.setOpacity(0.35);
+        pane.setOpacity(1);
     }
 
     public void switchToStart(ActionEvent event) {
+        music();
         appController.switchToScene("start");
+    }
+
+    MediaPlayer mediaPlayer;
+    public void music(){
+        String s = getClass().getResource("/music/tap.mp3").toExternalForm();
+        Media h = new Media(s);
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.setVolume(0.1);
+        mediaPlayer.play();
     }
 }
