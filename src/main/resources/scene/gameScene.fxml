@@ -23,22 +23,22 @@
             <Image url="@../image/dice.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="blueFish" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="blueFish" fitHeight="32.0" fitWidth="32.0" layoutX="282.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/blueFishReleased.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="orangeFish" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orangeFish" fitHeight="32.0" fitWidth="32.0" layoutX="282.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/orangeFishReleased.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="pinkFish" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="pinkFish" fitHeight="32.0" fitWidth="32.0" layoutX="282.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/pinkFishReleased.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="yellowFish" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yellowFish" fitHeight="32.0" fitWidth="32.0" layoutX="282.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/yellowFishReleased.jpg" />
          </image>

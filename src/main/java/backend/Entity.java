@@ -1,6 +1,6 @@
 package backend;
 
-import java.util.*;
+import java.util.List;
 
 public abstract class Entity {
     public enum Type {
@@ -58,7 +58,7 @@ public abstract class Entity {
 class Ship extends Entity {
     public Ship(String name, List<String> colors)
     {
-        super(Type.SHIP, -5, 80, 198, name, colors);
+        super(Type.SHIP, -6, 80, 198, name, colors);
     }
 
     public void addColor(String color)

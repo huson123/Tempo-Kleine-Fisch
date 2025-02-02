@@ -7,7 +7,14 @@ import javafx.animation.Animation;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -20,9 +27,14 @@ public class diceSceneController implements SceneController {
     @FXML
     private ImageView dice;
     @FXML
+    private ImageView rollButtonImageView;
+    @FXML
     private Button button;
 
     private boolean buttonFlag = false;
+    @FXML
+    AnchorPane pane;
+    private String bgurl = "/image/1.png";
 
 
     @Override
@@ -34,6 +46,10 @@ public class diceSceneController implements SceneController {
     public void init () throws IOException {
         //TODO ADD BACKGROUND ANIMATION
         gameplay = appController.getGameplay();
+        Image img = new Image(getClass().getResourceAsStream(bgurl));
+        BackgroundImage bgImage = new BackgroundImage(img, BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        Background bg = new Background(bgImage);
+        pane.setBackground(bg);
     }
     public void switchToGame() {
         try {
@@ -46,16 +62,16 @@ public class diceSceneController implements SceneController {
         return gameplay.roll();
     }
     public void displayResult() throws IOException {
-        stopMusic();
+        
         if (buttonFlag){
             buttonFlag = false;
-            button.setText("Roll");
-            //System.out.println("switching to game");
+            rollButtonImageView.setVisible(true);
             switchToGame();
             return;
         }
         //play animation according to result colour
         if (!(tl.getStatus() == Animation.Status.RUNNING)){
+            stopMusic();
             resultColor = rollDice();
             String tempResult = diceResult + resultColor + "/";
             //System.out.println(resultColor);
@@ -65,7 +81,7 @@ public class diceSceneController implements SceneController {
             music();
             tl.setOnFinished(e -> {
                 buttonFlag = true;
-                button.setText("Continue");
+                rollButtonImageView.setVisible(false);
             });
         }
 

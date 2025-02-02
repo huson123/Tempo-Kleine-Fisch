@@ -78,6 +78,8 @@ public class gameSceneController implements SceneController {
     public void init() throws IOException {
         gameplay = appController.getGameplay();
         entities = gameplay.getEntities();
+        displayScore(fishScore);
+        displayScore(shipScore);
 
 
 
@@ -107,6 +109,8 @@ public class gameSceneController implements SceneController {
 
     //MISC
     public void move (String color) throws IOException {
+        displayScore(fishScore);
+        displayScore(shipScore);
         // TODO MIGHT NEED TO REMOVE X AND Y POS IN ENTITY AS REDUNDANCY
         //MAIN LOGIC BLOCK
         //flag to determine if the color has been caught
@@ -244,7 +248,6 @@ public class gameSceneController implements SceneController {
                             if (gameplay.fishEndUpdate(entity)) {
                                 musicFinish();
                                 removeImageView(finalActionEntity);
-                                displayScore(fishScore);
                                 gameplay.addEscapedFish(entity.getColors().get(0));
                             }
                         });
@@ -263,10 +266,9 @@ public class gameSceneController implements SceneController {
                             //re adjust for smol animation
                             ship.setFitHeight(75);
                             ship.setFitWidth(75);
-                            ship.setY(ship.getY() + 32);
+                            ship.setY(ship.getY() + 40);
 
                             List<Entity> temp = gameplay.collisionUpdate(entity);
-                            displayScore(shipScore);
                             //System.out.println(gameplay.getShipScore());
                             System.out.println(temp);
                             if (!temp.isEmpty()) {
@@ -366,7 +368,7 @@ public class gameSceneController implements SceneController {
         //adjust for small animation
         ship.setFitHeight(150);
         ship.setFitWidth(150);
-        ship.setY(ship.getY() - 32);
+        ship.setY(ship.getY() - 40);
         return appController.playAnimation(moveURL,6,0.2,ship);
     }
     public Timeline shipCatch (String catchURL, ImageView ship) throws IOException {

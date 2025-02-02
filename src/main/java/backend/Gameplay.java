@@ -1,6 +1,9 @@
 package backend;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 /**
  * The Gameplay class manages the main logic of the game, including the state of the game, 
@@ -9,7 +12,7 @@ import java.util.*;
 public class Gameplay {
 
     private boolean gameOver = false; // flag 
-    private static final int SEA = 7; 
+    private static final int SEA = 6; 
     private final Random random; 
     private List<Entity> entities;
     private List<String> diceColor = new ArrayList<>(Arrays.asList("Red", "Green", "Blue", "Yellow", "Pink", "Orange"));
@@ -137,9 +140,9 @@ public class Gameplay {
      */
     public void init() {
         entities.add(new Ship("ship", new ArrayList<>(Arrays.asList("Red", "Green"))));
-        entities.add(new Fish(6,250,216,"blueFish", "Blue"));
-        entities.add(new Fish(-4,250,230,"yellowFish", "Yellow"));
-        entities.add(new Fish(6,250,244,"pinkFish", "Pink"));
+        entities.add(new Fish(0,250,216,"blueFish", "Blue"));
+        entities.add(new Fish(0,250,230,"yellowFish", "Yellow"));
+        entities.add(new Fish(0,250,244,"pinkFish", "Pink"));
         entities.add(new Fish(0,250,258,"orangeFish", "Orange"));
     }
 
