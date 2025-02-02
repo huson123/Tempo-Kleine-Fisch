@@ -6,6 +6,8 @@ module controller.tkfisch {
     requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
 
+    requires javafx.media;
+
     opens controller.tkfisch to javafx.fxml;
     opens scene to javafx.fxml;
     exports controller.tkfisch;
