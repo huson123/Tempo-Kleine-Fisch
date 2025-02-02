@@ -16,6 +16,8 @@ import controller.tkfisch.selectSceneController;
 import controller.tkfisch.startSceneController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class Main extends Application implements SceneController {
@@ -54,19 +56,15 @@ public class Main extends Application implements SceneController {
         fishSSC = (fishSelectSceneController) appController.getSceneController("fishSelect");
         startSC = (startSceneController) appController.getSceneController("start");
         instructionSC = (instructionSceneController) appController.getSceneController("instruction");
-        resultWSC = (resultWSceneController) appController.getSceneController("resultW");
-        resultLSC = (resultLSceneController) appController.getSceneController("resultL");
-        resultTSC = (resultTSceneController) appController.getSceneController("resultT");
 
         //scenes init
-        gameSC.init();
         diceSC.init();
         fishSSC.init();
         startSC.init();
+        music();
         instructionSC.init();
-        resultWSC.init();
-        resultLSC.init();
-        resultTSC.init();
+        
+        
 
         startGameLoop();
     }
@@ -94,13 +92,67 @@ public class Main extends Application implements SceneController {
                 }
                 else {
                     gameloop.stop();
-                    if (gameplay.printResult().equals("You Win!"))   appController.switchToScene("resultW");
-                    if (gameplay.printResult().equals("You Lose!"))   appController.switchToScene("resultL");
-                    if (gameplay.printResult().equals("Tie!"))   appController.switchToScene("resultT");
+                    try {
+                        result();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         };
         gameloop.start();
+    }
+
+    public void result() throws IOException {
+        if (gameplay.printResult().equals("You Win!")) {
+            resultWSC = (resultWSceneController) appController.getSceneController("resultW");
+            resultWSC.init();
+            stopMusic();
+            musicW();
+            appController.switchToScene("resultW");
+        }
+        if (gameplay.printResult().equals("You Lose!")) {
+            resultLSC = (resultLSceneController) appController.getSceneController("resultL");
+            resultLSC.init();
+            stopMusic();
+            musicnext();
+            appController.switchToScene("resultL");
+        }
+        if (gameplay.printResult().equals("Tie!")) {
+            resultTSC = (resultTSceneController) appController.getSceneController("resultT");
+            resultTSC.init();
+            stopMusic();
+            musicnext();
+            appController.switchToScene("resultT");
+        }
+    }
+
+    MediaPlayer mediaPlayer;
+    public void music(){
+        String s = getClass().getResource("/music/gamemusic.mp3").toExternalForm();
+        Media h = new Media(s);
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.setVolume(0.5);
+        mediaPlayer.play();
+    }
+    public void musicW(){
+        String s = getClass().getResource("/music/winmusic.mp3").toExternalForm();
+        Media h = new Media(s);
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.setVolume(0.05);
+        mediaPlayer.play();
+    }
+    public void musicnext(){
+        String s = getClass().getResource("/music/loseortiemusic.mp3").toExternalForm();
+        Media h = new Media(s);
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.setVolume(0.05);
+        mediaPlayer.play();
+    }
+    public void stopMusic() {
+        if (mediaPlayer != null) {
+        mediaPlayer.stop();
+        }
     }
 
     public static void main(String[] args) {
