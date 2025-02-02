@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.tkfisch.instructionSceneController">
+   <children>
+      <AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="328.0" fitWidth="361.0" layoutX="136.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/rules.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <ImageView fitHeight="167.0" fitWidth="179.0" layoutX="480.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/backbutton.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="524.0" layoutY="367.0" mnemonicParsing="false" onAction="#switchToStart" opacity="0.0" prefHeight="33.0" prefWidth="82.0" text="Back" />
+      <ImageView fitHeight="291.0" fitWidth="645.0" layoutX="74.0" layoutY="-91.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/information.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
