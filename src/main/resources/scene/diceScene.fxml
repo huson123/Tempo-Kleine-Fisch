@@ -14,7 +14,7 @@
             <Font name="Book Antiqua Bold" size="40.0" />
          </font>
       </Label>
-      <ImageView fx:id="dice" fitHeight="308.0" fitWidth="303.0" layoutX="169.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="dice" fitHeight="216.0" fitWidth="220.0" layoutX="211.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../animation/dice/result/diceResultRed/frame0000.png" />
          </image>
