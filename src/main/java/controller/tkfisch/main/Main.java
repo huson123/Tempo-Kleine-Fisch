@@ -50,6 +50,10 @@ public class Main extends Application implements SceneController {
         gameplay = appController.getGameplay();
         gameplay.init();
 
+        // set non resizable
+        Stage stage = appController.getPrimaryStage();
+        stage.setResizable(false);
+
         //get instances of controllers
         diceSC = (diceSceneController) appController.getSceneController("dice");
         gameSC = (gameSceneController) appController.getSceneController("game");

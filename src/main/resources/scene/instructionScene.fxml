@@ -7,14 +7,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.tkfisch.instructionSceneController">
    <children>
-      <AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <ImageView fitHeight="328.0" fitWidth="361.0" layoutX="136.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/rules.png" />
-               </image>
-            </ImageView>
-         </children></AnchorPane>
+      <ImageView fitHeight="328.0" fitWidth="361.0" layoutX="136.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/rules.png" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="167.0" fitWidth="179.0" layoutX="480.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/backbutton.png" />
@@ -26,5 +23,6 @@
             <Image url="@../image/information.png" />
          </image>
       </ImageView>
+      <AnchorPane fx:id="pane" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0" />
    </children>
 </AnchorPane>

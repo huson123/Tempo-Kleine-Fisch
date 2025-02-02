@@ -263,6 +263,7 @@ public class gameSceneController implements SceneController {
 
                             List<Entity> temp = gameplay.collisionUpdate(entity);
                             displayScore(shipScore);
+                            //System.out.println(gameplay.getShipScore());
                             System.out.println(temp);
                             if (!temp.isEmpty()) {
                                 try {
@@ -342,9 +343,6 @@ public class gameSceneController implements SceneController {
         else {
             shipScore.setText("Ship: " + gameplay.getShipScore());
         }
-    }
-    public void displayResult(String str){
-        result.setText(str);
     }
 
     //FISH SECTION
