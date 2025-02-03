@@ -140,10 +140,10 @@ public class Gameplay {
      */
     public void init() {
         entities.add(new Ship("ship", new ArrayList<>(Arrays.asList("Red", "Green"))));
-        entities.add(new Fish(0,250,216,"blueFish", "Blue"));
-        entities.add(new Fish(0,250,230,"yellowFish", "Yellow"));
-        entities.add(new Fish(0,250,244,"pinkFish", "Pink"));
-        entities.add(new Fish(0,250,258,"orangeFish", "Orange"));
+        entities.add(new Fish(0,"blueFish", "Blue"));
+        entities.add(new Fish(0,"yellowFish", "Yellow"));
+        entities.add(new Fish(0,"pinkFish", "Pink"));
+        entities.add(new Fish(0,"orangeFish", "Orange"));
     }
 
     /**
