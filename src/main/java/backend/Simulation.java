@@ -73,15 +73,14 @@ public class Simulation {
     // Initialize game state
     public void init() {
         entities = new ArrayList<>(); // Reset entity list
-        entities.add(new Ship("Ship",
-                new ArrayList<>(Arrays.asList("Red", "Green"))));
+        entities.add(new Ship("Ship", new ArrayList<>(Arrays.asList("Red", "Green"))));
         entities.add(new Fish(0, "Fish1", "Blue"));
         entities.add(new Fish(0, "Fish2", "Yellow"));
         entities.add(new Fish(0, "Fish3", "Pink"));
         entities.add(new Fish(0, "Fish4", "Orange"));
     }
 
-    // Simulate a dice roll and move the respective entity
+    // Simulate a die roll and move the respective entity
     public String rollAndMove() {
         String color = diceColor.get(random.nextInt(diceColor.size()));
 
@@ -165,14 +164,10 @@ public class Simulation {
         }
 
         // Print results
-        System.out.println("Ship Wins: "
-                + simulation.getShipWin());
-        System.out.println("Fish Wins: "
-                + simulation.getFishWin());
-        System.out.println("Ties: "
-                + simulation.getTie());
+        System.out.println("Ship Wins: " + simulation.getShipWin());
+        System.out.println("Fish Wins: " + simulation.getFishWin());
+        System.out.println("Ties: " + simulation.getTie());
 
-        System.out.println("Average Turn: "
-                + simulation.getTurn() / numGames);
+        System.out.println("Average Turn: " + simulation.getTurn() / numGames);
     }
 }

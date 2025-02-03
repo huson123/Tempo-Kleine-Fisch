@@ -9,11 +9,13 @@ module controller.tkfisch {
     requires javafx.media;
     requires java.sql;
 
-    opens controller.tkfisch to javafx.fxml;
+    opens view to javafx.fxml;
     opens scene to javafx.fxml;
-    exports controller.tkfisch;
+    exports view;
     exports main;
     opens main to javafx.fxml;
+    exports controller;
+    opens controller to javafx.fxml;
 
 
 }

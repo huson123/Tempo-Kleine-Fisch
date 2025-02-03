@@ -36,6 +36,6 @@ public abstract class Entity {
     }
 
     public void move() {
-        // Implement movement logic here
+        this.position++;
     }
 }
