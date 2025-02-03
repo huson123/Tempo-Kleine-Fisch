@@ -68,7 +68,7 @@ public class diceSceneController implements SceneController {
         
         if (buttonFlag){
             buttonFlag = false;
-            addDelay(0.1, () -> {
+            addDelay(0.06, () -> {
                 rollButtonImageView.setVisible(true);
                 switchToGame();
             });

@@ -108,6 +108,10 @@ public class gameSceneController implements SceneController {
         ImageView actionEntity = null;
         String moveURL = null;
         String stillURL = null;
+        displayScore(fishScore);
+        displayScore(shipScore);
+
+
 
         if (escapedFish.contains(color) && gameplay.getPlayerType().equals("Fish")) {
             addDelay(0.1, () -> {
@@ -199,7 +203,6 @@ public class gameSceneController implements SceneController {
                             if (gameplay.fishEndUpdate(entity)) {
                                 musicFinish();
                                 removeImageView(finalActionEntity);
-                                displayScore(fishScore);
                                 gameplay.addEscapedFish(entity.getColors().get(0));
                             }
                         });
@@ -216,7 +219,6 @@ public class gameSceneController implements SceneController {
                             ship.setY(ship.getY() + 32);
 
                             List<Entity> temp = gameplay.collisionUpdate(entity);
-                            displayScore(shipScore);
                             if (!temp.isEmpty()) {
                                 try {
                                     timeline = shipCatch(shipCatchURL, ship);
