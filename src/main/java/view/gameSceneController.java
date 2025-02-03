@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import backend.Entity;
-import backend.Gameplay;
+import model.Entity;
+import model.Gameplay;
 import controller.Controller;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;

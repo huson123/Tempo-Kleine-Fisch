@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="bgPane" prefHeight="360.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.fishSelectSceneController">
+   <children>
+      <AnchorPane fx:id="pane" prefHeight="380.0" prefWidth="660.0" />
+      <ImageView fitHeight="484.0" fitWidth="670.0" layoutX="71.0" layoutY="-142.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/choosethefish.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="blueFish" fitHeight="167.0" fitWidth="167.0" layoutX="60.0" layoutY="132.0" nodeOrientation="RIGHT_TO_LEFT" onMouseEntered="#blueFishEntered" onMouseExited="#blueFishExited" onMousePressed="#blueFishPressed" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/bluefish.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="orangeFish" fitHeight="193.0" fitWidth="200.0" layoutX="143.0" layoutY="167.0" nodeOrientation="RIGHT_TO_LEFT" onMouseEntered="#orangeFishEntered" onMouseExited="#orangeFishExited" onMousePressed="#orangeFishPressed" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/orangefish.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="pinkFish" fitHeight="215.0" fitWidth="200.0" layoutX="266.0" layoutY="132.0" nodeOrientation="RIGHT_TO_LEFT" onMouseEntered="#pinkFishEntered" onMouseExited="#pinkFishExited" onMousePressed="#pinkFishPressed" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/pinkfish.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="yellowFish" fitHeight="181.0" fitWidth="183.0" layoutX="435.0" layoutY="161.0" nodeOrientation="RIGHT_TO_LEFT" onMouseEntered="#yellowFishEntered" onMouseExited="#yellowFishExited" onMousePressed="#yellowFishPressed" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/yellowfish.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+   </children>
+</AnchorPane>

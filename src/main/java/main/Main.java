@@ -2,7 +2,7 @@ package main;
 
 import java.io.IOException;
 
-import backend.Gameplay;
+import model.Gameplay;
 import controller.Controller;
 import view.SceneController;
 import view.diceSceneController;

@@ -1,6 +1,6 @@
 package view;
 
-import backend.Gameplay;
+import model.Gameplay;
 import controller.Controller;
 import javafx.animation.Animation;
 import javafx.animation.Timeline;

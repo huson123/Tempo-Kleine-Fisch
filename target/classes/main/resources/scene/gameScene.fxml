@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="360.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gameSceneController">
+   <children>
+      <Label fx:id="fishScore" layoutX="519.0" prefHeight="32.0" prefWidth="81.0" text="Fish:" textFill="#0015ff">
+         <font>
+            <Font name="Cooper Black" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="105.0" fitWidth="69.0" layoutX="459.0" layoutY="224.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/finish.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="dice" fitHeight="143.0" fitWidth="124.0" layoutX="509.0" layoutY="223.0" onMouseEntered="#diceEntered" onMouseExited="#diceExited" onMousePressed="#dicePressed" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/dice.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="blueFish" fitHeight="32.0" fitWidth="32.0" layoutX="282.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/blueFishReleased.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="orangeFish" fitHeight="32.0" fitWidth="32.0" layoutX="282.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/orangeFishReleased.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="pinkFish" fitHeight="32.0" fitWidth="32.0" layoutX="282.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/pinkFishReleased.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="yellowFish" fitHeight="32.0" fitWidth="32.0" layoutX="282.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/yellowFishReleased.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ship" fitHeight="77.0" fitWidth="98.0" layoutX="66.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/shipReleased.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="shipScore" layoutX="519.0" layoutY="32.0" prefHeight="32.0" prefWidth="124.0" text="Ship:" textFill="#0015ff">
+         <font>
+            <Font name="Cooper Black" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="result" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="112.0" prefHeight="136.0" prefWidth="649.0" textFill="RED">
+         <font>
+            <Font name="Book Antiqua Bold" size="96.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -2,7 +2,7 @@ package view;
 
 import java.io.IOException;
 
-import backend.Gameplay;
+import model.Gameplay;
 import controller.Controller;
 import javafx.animation.Animation;
 import javafx.animation.PauseTransition;
