@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Simulation {
+    //written by Song Thien Phuc Nguyen
     private boolean gameOver = false;
     private int SEA = 6;
     private final Random random;
@@ -26,6 +27,7 @@ public class Simulation {
 
     // Constructor
     public Simulation() {
+        //written by Song Thien Phuc Nguyen
         this.random = new Random();
         random.setSeed(1000);
     }
@@ -33,54 +35,56 @@ public class Simulation {
     // Getter Methods
     public boolean isGameOver() {
         return this.gameOver;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     public int getShipWin() {
         return this.shipWin;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     public int getFishWin() {
         return this.fishWin;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     public int getTie() {
         return this.tie;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     public int getTurn()
     {
         return this.turn;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     public int getScoreGap()
     {
         return this.scoreGap;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     // Setter Methods
     public void setGameOver() {
         this.gameOver = true;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     public void resetGameOver() {
         this.gameOver = false;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     public void addShipScore() {
         this.shipScore++;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     public void addFishScore() {
         this.fishScore++;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     public void resetScores() {
+        //written by Song Thien Phuc Nguyen
         this.shipScore = 0;
         this.fishScore = 0;
     }
 
     // Initialize game state
     public void init(int shipPos, int fishPos, int seaPos) {
+        //written by Song Thien Phuc Nguyen
         entities = new ArrayList<>(); // Reset entity list
         entities.add(new Ship(shipPos, "Ship", new ArrayList<>(Arrays.asList("Red", "Green"))));
         entities.add(new Fish(fishPos, "Fish1", "Blue"));
@@ -92,6 +96,7 @@ public class Simulation {
 
     // Simulate a die roll and move the respective entity
     public String rollAndMove() {
+        //written by Song Thien Phuc Nguyen
         String color = diceColor.get(random.nextInt(diceColor.size()));
 
         this.turn++;
@@ -107,6 +112,7 @@ public class Simulation {
 
     // Update game state
     public void update() {
+        //written by Song Thien Phuc Nguyen
         List<Entity> entitiesToRemove = new ArrayList<>();
         Ship ship = null;
 
@@ -146,6 +152,7 @@ public class Simulation {
 
     // Determine game result
     public void addResult() {
+        //written by Song Thien Phuc Nguyen
         if (shipScore > fishScore) {
             shipWin++;
         } else if (shipScore < fishScore) {
@@ -158,6 +165,7 @@ public class Simulation {
 
     // Main simulation
     public static void main(String[] args) {
+        //written by Song Thien Phuc Nguyen
         Simulation simulation = new Simulation();
         int numGames = 1000000; // Run 1,000,000 games
 

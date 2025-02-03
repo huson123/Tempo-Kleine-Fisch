@@ -21,6 +21,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class Main extends Application implements SceneController {
+    //written by Phuc Tan Hien Tran
     //import controllers
     private diceSceneController diceSC;
     private gameSceneController gameSC;
@@ -40,9 +41,10 @@ public class Main extends Application implements SceneController {
     @Override
     public void setAppController(Controller appController) {
         this.appController = appController;
-    }
+    }//written by Phuc Tan Hien Tran
     @Override
     public void start(Stage primaryStage) throws IOException {
+        //written by Phuc Tan Hien Tran
         // Initialize the Controller with the primary stage
         appController = new Controller(stage);
         // Initialize scenes and load the first one
@@ -74,6 +76,7 @@ public class Main extends Application implements SceneController {
         startGameLoop();
     }
     public void startGameLoop () throws IOException {
+        //written by Phuc Tan Hien Tran
         //game loop and updating logic
         gameloop = new AnimationTimer() {
             @Override
@@ -109,6 +112,7 @@ public class Main extends Application implements SceneController {
     }
 
     public void result() throws IOException {
+        //written by Phuc Tan Hien Tran
         if (gameplay.printResult().equals("You Win!")) {
             resultWSC = (resultWSceneController) appController.getSceneController("resultW");
             resultWSC.init();
@@ -134,6 +138,7 @@ public class Main extends Application implements SceneController {
 
     MediaPlayer mediaPlayer;
     public void music(){
+        //written by Huynh Anh Duc Truong
         String s = getClass().getResource("/music/gamemusic.mp3").toExternalForm();
         Media h = new Media(s);
         mediaPlayer = new MediaPlayer(h);
@@ -142,6 +147,7 @@ public class Main extends Application implements SceneController {
         mediaPlayer.play();
     }
     public void musicW(){
+        //written by Huynh Anh Duc Truong
         String s = getClass().getResource("/music/winmusic.mp3").toExternalForm();
         Media h = new Media(s);
         mediaPlayer = new MediaPlayer(h);
@@ -149,6 +155,7 @@ public class Main extends Application implements SceneController {
         mediaPlayer.play();
     }
     public void musicnext(){
+        //written by Huynh Anh Duc Truong
         String s = getClass().getResource("/music/loseortiemusic.mp3").toExternalForm();
         Media h = new Media(s);
         mediaPlayer = new MediaPlayer(h);
@@ -156,6 +163,7 @@ public class Main extends Application implements SceneController {
         mediaPlayer.play();
     }
     public void stopMusic() {
+        //written by Huynh Anh Duc Truong
         if (mediaPlayer != null) {
         mediaPlayer.stop();
         }
@@ -163,5 +171,5 @@ public class Main extends Application implements SceneController {
 
     public static void main(String[] args) {
         launch();
-    }
+    }//written by Phuc Tan Hien Tran
 }

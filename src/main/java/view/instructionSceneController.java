@@ -12,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class instructionSceneController implements SceneController {
+    //written by Huynh Anh Duc Truong
     private Controller appController;
 
     @FXML
@@ -28,6 +29,7 @@ public class instructionSceneController implements SceneController {
 
     @FXML
     public void init() throws IOException {
+        //written by Huynh Anh Duc Truong
         Timeline tl = new Timeline();
         tl = appController.setBackgroundAnimation(bg, 12, 0.2, pane);
         tl.play();
@@ -35,12 +37,14 @@ public class instructionSceneController implements SceneController {
     }
 
     public void switchToStart(ActionEvent event) {
+        //written by Huynh Anh Duc Truong
         music();
         appController.switchToScene("start");
     }
 
     MediaPlayer mediaPlayer;
     public void music(){
+        //written by Huynh Anh Duc Truong
         String s = getClass().getResource("/music/tap.mp3").toExternalForm();
         Media h = new Media(s);
         mediaPlayer = new MediaPlayer(h);

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class fishSelectSceneController implements SceneController {
+    //written by Phuc Tan Hien Tran
     private Controller appController;
     private gameSceneController gameSC;
     private Gameplay gameplay;
@@ -29,10 +30,11 @@ public class fishSelectSceneController implements SceneController {
     @Override
     public void setAppController(Controller appController) {
         this.appController = appController;
-    }
+    }//written by Phuc Tan Hien Tran
 
 
     public void switchToGame() {
+        //written by Phuc Tan Hien Tran
         try {
             appController.switchToScene("game");
         } catch (Exception e) {
@@ -40,6 +42,7 @@ public class fishSelectSceneController implements SceneController {
         }
     }
     public void init() throws IOException {
+        //written by Phuc Tan Hien Tran
        gameSC = (gameSceneController) appController.getSceneController("game");
        gameplay = appController.getGameplay();
         if (!(tl.getStatus() == Animation.Status.RUNNING)){
@@ -54,6 +57,7 @@ public class fishSelectSceneController implements SceneController {
     }
 
     public void nonColor(){
+        //written by Phuc Tan Hien Tran
         // remove the colors which has been caught or escaped
         List<String> caughtFish = gameplay.getCaughtFish();
         List<String> escapedFish = gameplay.getEscapedFish();
@@ -66,10 +70,12 @@ public class fishSelectSceneController implements SceneController {
 
     }
     public void removeImageView(ImageView obj){
+        //written by Phuc Tan Hien Tran
         //System.out.println("Removed ImageView: " + obj);
         bgPane.getChildren().remove(obj);
     }
     public ImageView convertStrToImageView(String color){
+        //written by Phuc Tan Hien Tran
         switch (color){
             case "Blue":
                 return blueFish;
@@ -84,6 +90,7 @@ public class fishSelectSceneController implements SceneController {
     }
 
     public void blueFishPressed() throws IOException {
+        //written by Huynh Anh Duc Truong
         //blueFish.setImage(blueFishPressed);
         //gameSC.setFishSelectedColor("Blue");
         gameSC.move("Blue");
@@ -91,16 +98,19 @@ public class fishSelectSceneController implements SceneController {
     }
 
     public void blueFishEntered() {
+        //written by Huynh Anh Duc Truong
         //blueFish.setImage(blueFishPressed);
         blueFish.setOpacity(1);
     }
 
     public void blueFishExited() {
+        //written by Huynh Anh Duc Truong
         //blueFish.setImage(blueFishReleased);
         blueFish.setOpacity(0.5);
     }
 
     public void pinkFishPressed() throws IOException {
+        //written by Huynh Anh Duc Truong
         //pinkFish.setImage(pinkFishPressed);
         //gameSC.setFishSelectedColor("Pink");
         gameSC.move("Pink");
@@ -109,6 +119,7 @@ public class fishSelectSceneController implements SceneController {
     }
 
     public void pinkFishEntered() {
+        //written by Huynh Anh Duc Truong
         //pinkFish.setImage(pinkFishPressed);
         pinkFish.setOpacity(1);
     }
@@ -119,6 +130,7 @@ public class fishSelectSceneController implements SceneController {
     }
 
     public void orangeFishPressed() throws IOException {
+        //written by Huynh Anh Duc Truong
         //orangeFish.setImage(orangeFishPressed);
         //gameSC.setFishSelectedColor("Orange");
         gameSC.move("Orange");
@@ -127,16 +139,19 @@ public class fishSelectSceneController implements SceneController {
     }
 
     public void orangeFishEntered() {
+        //written by Huynh Anh Duc Truong
         //orangeFish.setImage(orangeFishPressed);
         orangeFish.setOpacity(1);
     }
 
     public void orangeFishExited() {
+        //written by Huynh Anh Duc Truong
         //orangeFish.setImage(orangeFishReleased);
         orangeFish.setOpacity(0.5);
     }
 
     public void yellowFishPressed() throws IOException {
+        //written by Huynh Anh Duc Truong
         //yellowFish.setImage(yellowFishPressed);
         //gameSC.setFishSelectedColor("Yellow");
         gameSC.move("Yellow");
@@ -145,11 +160,13 @@ public class fishSelectSceneController implements SceneController {
     }
 
     public void yellowFishEntered() {
+        //written by Huynh Anh Duc Truong
         //yellowFish.setImage(yellowFishPressed);
         yellowFish.setOpacity(1);
     }
 
     public void yellowFishExited() {
+        //written by Huynh Anh Duc Truong
         //yellowFish.setImage(yellowFishReleased);
         yellowFish.setOpacity(0.5);
     }

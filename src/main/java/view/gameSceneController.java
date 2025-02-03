@@ -21,6 +21,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class gameSceneController implements SceneController {
+    //written by Phuc Tan Hien Tran
     private Controller appController;
     private Gameplay gameplay;
     private List<Entity> entities;
@@ -71,11 +72,14 @@ public class gameSceneController implements SceneController {
     @Override
     public void setAppController(Controller appController) {
         this.appController = appController;
-    }
+    }//written by Phuc Tan Hien Tran
 
     public void init() throws IOException {
+        //written by Phuc Tan Hien Tran
         gameplay = appController.getGameplay();
         entities = gameplay.getEntities();
+        displayScore(fishScore);
+        displayScore(shipScore);
 
         Timeline temp = fishIdle(blueFishStillURL, blueFish);
         idleTimelines.put(blueFish, temp);
@@ -102,6 +106,7 @@ public class gameSceneController implements SceneController {
     }
 
     public void move(String color) throws IOException {
+        //written by Phuc Tan Hien Tran
         boolean fishCaught = false;
         List<String> caughtFish = gameplay.getCaughtFish();
         List<String> escapedFish = gameplay.getEscapedFish();
@@ -199,7 +204,6 @@ public class gameSceneController implements SceneController {
                             if (gameplay.fishEndUpdate(entity)) {
                                 musicFinish();
                                 removeImageView(finalActionEntity);
-                                displayScore(fishScore);
                                 gameplay.addEscapedFish(entity.getColors().get(0));
                             }
                         });
@@ -216,7 +220,7 @@ public class gameSceneController implements SceneController {
                             ship.setY(ship.getY() + 32);
 
                             List<Entity> temp = gameplay.collisionUpdate(entity);
-                            displayScore(shipScore);
+
                             if (!temp.isEmpty()) {
                                 try {
                                     timeline = shipCatch(shipCatchURL, ship);
@@ -256,13 +260,14 @@ public class gameSceneController implements SceneController {
 
     public void moveImageView(int amount, ImageView obj) {
         obj.setX(obj.getX() + amount);
-    }
+    }//written by Phuc Tan Hien Tran
 
     public void removeImageView(ImageView obj) {
         pane.getChildren().remove(obj);
-    }
+    }//written by Phuc Tan Hien Tran
 
     public ImageView convertToImageView(Entity fish) {
+        //written by Phuc Tan Hien Tran
         switch (fish.getName()) {
             case "blueFish":
                 return blueFish;
@@ -277,12 +282,14 @@ public class gameSceneController implements SceneController {
     }
 
     private void addDelay(double seconds, Runnable onComplete) {
+        //written by Phuc Tan Hien Tran
         PauseTransition pause = new PauseTransition(Duration.seconds(seconds));
         pause.setOnFinished(event -> onComplete.run());
         pause.play();
     }
 
     private void displayScore(Label obj) {
+        //written by Phuc Tan Hien Tran
         if (obj == fishScore) {
             fishScore.setText("Fish: " + gameplay.getFishScore());
         } else {
@@ -290,11 +297,8 @@ public class gameSceneController implements SceneController {
         }
     }
 
-    public void displayResult(String str) {
-        result.setText(str);
-    }
-
     public Timeline fishMove(String moveURL, ImageView fish) throws IOException {
+        //written by Phuc Tan Hien Tran
         fish.setFitHeight(70);
         fish.setFitWidth(70);
         fish.setY(ship.getY() - 15);
@@ -302,10 +306,12 @@ public class gameSceneController implements SceneController {
     }
 
     public Timeline fishIdle(String idleURL, ImageView fish) throws IOException {
+        //written by Phuc Tan Hien Tran
         return appController.playIdleAnimation(idleURL, 12, 0.2, fish);
     }
 
     public Timeline shipMove(String moveURL, ImageView ship) throws IOException {
+        //written by Phuc Tan Hien Tran
         ship.setFitHeight(150);
         ship.setFitWidth(150);
         ship.setY(ship.getY() - 32);
@@ -313,30 +319,36 @@ public class gameSceneController implements SceneController {
     }
 
     public Timeline shipCatch(String catchURL, ImageView ship) throws IOException {
+        //written by Phuc Tan Hien Tran
         return appController.playAnimation(catchURL, 11, 0.2, ship);
     }
 
     public Timeline shipIdle(String idleURL, ImageView ship) throws IOException {
+        //written by Phuc Tan Hien Tran
         return appController.playIdleAnimation(idleURL, 12, 0.2, ship);
     }
 
     public void dicePressed(MouseEvent event) throws IOException {
+        //written by Phuc Tan Hien Tran
         music();
         appController.switchToScene("dice");
     }
 
     public void diceEntered(MouseEvent event) throws IOException {
+        //written by Phuc Tan Hien Tran
         Timeline tl = appController.playAnimation(diceIdleUrl, 12, 0.1, dice);
         tl.play();
     }
 
     public void diceExited(MouseEvent event) {
+        //written by Phuc Tan Hien Tran
         dice.setImage(new Image(getClass().getResourceAsStream("/image/dice.png")));
     }
 
     MediaPlayer mediaPlayer;
 
     public void musicf() {
+        //written by Huynh Anh Duc Truong
         String s = getClass().getResource("/music/splashmusic.mp3").toExternalForm();
         Media h = new Media(s);
         mediaPlayer = new MediaPlayer(h);
@@ -348,6 +360,7 @@ public class gameSceneController implements SceneController {
     }
 
     public void musics() {
+        //written by Huynh Anh Duc Truong
         String s = getClass().getResource("/music/shipmove.mp3").toExternalForm();
         Media h = new Media(s);
         mediaPlayer = new MediaPlayer(h);
@@ -356,6 +369,7 @@ public class gameSceneController implements SceneController {
     }
 
     public void music() {
+        //written by Huynh Anh Duc Truong
         String s = getClass().getResource("/music/tap.mp3").toExternalForm();
         Media h = new Media(s);
         mediaPlayer = new MediaPlayer(h);
@@ -364,6 +378,7 @@ public class gameSceneController implements SceneController {
     }
 
     public void musicFinish() {
+        //written by Huynh Anh Duc Truong
         String s = getClass().getResource("/music/finish.mp3").toExternalForm();
         Media h = new Media(s);
         mediaPlayer = new MediaPlayer(h);
@@ -372,6 +387,7 @@ public class gameSceneController implements SceneController {
     }
 
     public void musicc() {
+        //written by Huynh Anh Duc Truong
         String s = getClass().getResource("/music/catched.mp3").toExternalForm();
         Media h = new Media(s);
         mediaPlayer = new MediaPlayer(h);

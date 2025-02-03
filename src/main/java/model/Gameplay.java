@@ -10,6 +10,7 @@ import java.util.Random;
  * the entities involved, and the scores.
  */
 public class Gameplay {
+    //written by Song Thien Phuc Nguyen
 
     private boolean gameOver = false; // flag 
     private static final int SEA = 6; 
@@ -28,6 +29,7 @@ public class Gameplay {
      * Initializes the entities, random generator, and scores.
      */
     public Gameplay() {
+        //written by Song Thien Phuc Nguyen
         this.entities = new ArrayList<>(); 
         this.random = new Random(); 
         this.shipScore = 0;
@@ -40,7 +42,7 @@ public class Gameplay {
      */
     public boolean isGameOver() {
         return this.gameOver; 
-    }
+    }//written by Song Thien Phuc Nguyen
 
     /**
      * Gets the current score of the ship.
@@ -48,7 +50,7 @@ public class Gameplay {
      */
     public int getShipScore() {
         return this.shipScore;
-    } 
+    } //written by Song Thien Phuc Nguyen
 
     /**
      * Gets the current score of the fish.
@@ -56,7 +58,7 @@ public class Gameplay {
      */
     public int getFishScore() {
         return this.fishScore; 
-    } 
+    } //written by Song Thien Phuc Nguyen
 
     /**
      * Gets the list of dice colors.
@@ -64,7 +66,7 @@ public class Gameplay {
      */
     public List<String> getDiceColor() {
         return this.diceColor;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     /**
      * Gets the list of entities in the game.
@@ -72,7 +74,7 @@ public class Gameplay {
      */
     public List<Entity> getEntities() {
         return this.entities;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     /**
      * Gets the player type.
@@ -80,7 +82,7 @@ public class Gameplay {
      */
     public String getPlayerType() {
         return this.playerType;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     /**
      * Adds a caught fish color to the list.
@@ -88,7 +90,7 @@ public class Gameplay {
      */
     public void addCaughtFish(String color) {
         caughtFish.add(color);
-    }
+    }//written by Song Thien Phuc Nguyen
 
     /**
      * Gets the list of caught fish colors.
@@ -96,7 +98,7 @@ public class Gameplay {
      */
     public List<String> getCaughtFish() {
         return caughtFish;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     /**
      * Adds an escaped fish color to the list.
@@ -104,7 +106,7 @@ public class Gameplay {
      */
     public void addEscapedFish(String color) {
         escapedFish.add(color);
-    }
+    }//written by Song Thien Phuc Nguyen
 
     /**
      * Gets the list of escaped fish colors.
@@ -112,33 +114,34 @@ public class Gameplay {
      */
     public List<String> getEscapedFish() {
         return escapedFish;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     /**
      * Sets the game over flag to true.
      */
     public void setGameOver() {
         this.gameOver = true;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     /**
      * Increments the ship's score by one.
      */
     public void addShipScore() {
         this.shipScore++;
-    }
+    }//written by Song Thien Phuc Nguyen
 
     /**
      * Increments the fish's score by one.
      */
     public void addFishScore() {
         this.fishScore++; 
-    }
+    }//written by Song Thien Phuc Nguyen
 
     /**
      * Initializes the game by adding initial entities.
      */
     public void init() {
+        //written by Song Thien Phuc Nguyen
         entities.add(new Ship(-6, "ship", new ArrayList<>(Arrays.asList("Red", "Green"))));
         entities.add(new Fish(0,"blueFish", "Blue"));
         entities.add(new Fish(0,"yellowFish", "Yellow"));
@@ -151,6 +154,7 @@ public class Gameplay {
      * @return the color obtained from the dice roll.
      */
     public String roll() {
+        //written by Song Thien Phuc Nguyen
         List<String> colors = getDiceColor();
         int randomIndex = random.nextInt(colors.size());
         return colors.get(randomIndex);
@@ -162,6 +166,7 @@ public class Gameplay {
      * @return a list of fish entities that were caught by the ship.
      */
     public List<Entity> collisionUpdate(Entity entity) {
+        //written by Song Thien Phuc Nguyen
         List<Entity> deletedFish = new ArrayList<>();
         for (Entity fish : entities) {
             if (fish.getType() == Entity.Type.FISH && fish.getPosition() == entity.getPosition()) {
@@ -181,6 +186,7 @@ public class Gameplay {
      * @return true if the fish reached the sea, false otherwise.
      */
     public boolean fishEndUpdate(Entity entity) {
+        //written by Song Thien Phuc Nguyen
         boolean flag = false;
         if (entity.getType() == Entity.Type.FISH) {
             if (entity.getPosition() >= SEA) {
@@ -198,6 +204,7 @@ public class Gameplay {
      * Ends the game if no fish are left.
      */
     public void endGameUpdate() {
+        //written by Song Thien Phuc Nguyen
         if (entities.stream().noneMatch(e -> e.getType() == Entity.Type.FISH)) {
             setGameOver();
         }
@@ -208,6 +215,7 @@ public class Gameplay {
      * @return the result of the game as a string.
      */
     public String printResult() {
+        //written by Song Thien Phuc Nguyen
         if (getPlayerType().equals("Ship")) {
             if (getShipScore() > getFishScore()) {
                 return "You Win!";
@@ -232,6 +240,7 @@ public class Gameplay {
      * @param playerType the type of the player (e.g., "Ship" or "Fish").
      */
     public void setPlayerType(String playerType) {
+        //written by Song Thien Phuc Nguyen
         this.playerType = playerType;
         System.out.println("Player type set to: " + playerType);
     }

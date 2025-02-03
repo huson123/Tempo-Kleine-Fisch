@@ -11,6 +11,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class startSceneController implements SceneController {
+   //written by Huynh Anh Duc Truong
    private selectSceneController sceneSC;
    private Controller appController;
    @FXML
@@ -21,15 +22,17 @@ public class startSceneController implements SceneController {
    @Override
    public void setAppController(Controller appController) {
       this.appController = appController;
-   }
+   }//written by Huynh Anh Duc Truong
 
    public void init() throws IOException {
+      //written by Huynh Anh Duc Truong
       Timeline tl = new Timeline();
       tl = appController.setBackgroundAnimation(bg, 12, 0.2, pane);
       tl.play();
       pane.setOpacity(1);
    }
    public void switchToSelect(ActionEvent event) throws IOException {
+      //written by Huynh Anh Duc Truong
       music();
       sceneSC = (selectSceneController) appController.getSceneController("select");
       sceneSC.init();
@@ -41,10 +44,11 @@ public class startSceneController implements SceneController {
    }
    public void Exit(ActionEvent event) {
       System.exit(0);
-   }
+   }//written by Huynh Anh Duc Truong
 
    MediaPlayer mediaPlayer;
    public void music(){
+      //written by Huynh Anh Duc Truong
       String s = getClass().getResource("/music/tap.mp3").toExternalForm();
       Media h = new Media(s);
       mediaPlayer = new MediaPlayer(h);
