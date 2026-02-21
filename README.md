@@ -12,6 +12,8 @@ The game fully preserves the original board game mechanics:
 - Win / Lose / Tie conditions
 The implementation follows the MVC (Model–View–Controller) architecture and Object-Oriented Programming principles.
 
+<img width="818" height="483" alt="Game Play Screen" src="https://github.com/user-attachments/assets/04757f39-4e1d-43a4-abf1-4f1799fac2a4" />
+
 ## Key Features
 - JavaFX GUI with animated scenes
 - Clean MVC architecture
